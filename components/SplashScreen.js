@@ -1,5 +1,7 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Color } from '../constant/Color';
 
 
 const SplashScreen = ({ navigation }) => {
@@ -7,27 +9,30 @@ const SplashScreen = ({ navigation }) => {
     useEffect(() => {
         setTimeout(() => {
             navigation.navigate('Home');
-        }, 2000);
+        }, 3000);
     }, [navigation])
 
     return (
-        <View style={styles.rootContainer} >
-            <View style={styles.logoImage}>
-                <SafeAreaView>
-                    <Image source={require('../assets/images/logo.png')} />
-                </SafeAreaView>
+        <>
+            <StatusBar style='light' />
+            <View style={styles.rootContainer} >
+                <View style={styles.logoImage}>
+                    <SafeAreaView>
+                        <Image source={require('../assets/images/logo.png')} />
+                    </SafeAreaView>
+                </View>
+                <View style={styles.nodeImage} >
+                    <Image source={require('../assets/images/illus.png')} />
+                </View>
             </View>
-            <View style={styles.nodeImage} >
-                <Image source={require('../assets/images/illus.png')} />
-            </View>
-        </View>
+        </>
     );
 };
 export default SplashScreen;
 
 const styles = StyleSheet.create({
     rootContainer: {
-        backgroundColor: '#111432',
+        backgroundColor: Color.bg,
         flex: 1,
     },
     nodeImage: {

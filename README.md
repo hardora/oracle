@@ -3,4 +3,4 @@
      cd scale-ethereum
      npm install
      npm start
-   - Scan the QRCODE with you Expo App 
+   - Scan the QRCODE with your Expo App 
