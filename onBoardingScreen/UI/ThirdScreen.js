@@ -1,19 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import { View, StyleSheet, SafeAreaView, Image, Pressable, Text, ScrollView } from "react-native";
 import { Color } from "../../constant/Color";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 
-function FirstScreen() {
+function ThirdScreen({ navigation }) {
 
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
-    function skipHandler() {
-        navigation.navigate('Dashboard');
-        // console.log(navigation.navigate('Dashboard'));
-        // navigation.goBack();
-    }
     function nextHandler() {
-        navigation.navigate('SecondScreen');
+        navigation.navigate('Dashboard');
     }
 
     return (
@@ -21,36 +16,36 @@ function FirstScreen() {
             <View style={styles.container} >
                 <SafeAreaView>
                     <View style={styles.nobHolder}>
+                        <View style={[styles.nob, styles.defaultNob]} ></View>
+                        <View style={[styles.nob, styles.defaultNob]} ></View>
                         <View style={[styles.nob, styles.activeNob]} ></View>
-                        <View style={[styles.nob, styles.defaultNob]} ></View>
-                        <View style={[styles.nob, styles.defaultNob]} ></View>
                     </View>
                 </SafeAreaView>
                 <View style={styles.logo} >
                     <Image source={require('../../assets/images/logo_s.png')} />
                 </View>
                 <View style={styles.imageHolder} >
-                    <Image source={require('../../assets/images/decentralized.png')} />
+                    <Image resizeMode='contain' style={{}} source={require('../../assets/images/computer.png')} />
                 </View>
 
                 <View style={styles.swiperTextHolder}>
-                    <Text style={styles.italyText}>Fast,</Text>
-                    <Text style={styles.italyText}>Secure, and</Text>
-                    <Text style={styles.boldText}>Decentralized</Text>
-                    <Text style={styles.description}>A decentralized node system that removes
-                        he hurdle of third-party interference/delay.
+                    <Text style={styles.italyText}>Simple</Text>
+                    <Text style={styles.italyText}>hardware</Text>
+                    <Text style={styles.boldText}>Compute-enabled</Text>
+                    <Text style={styles.description}>Earn with a hardware compute-enabled
+                        oracle that computes “deterministic” and “non-deterministic” validation.
                     </Text>
                 </View>
 
                 <View style={styles.buttonHolder}>
 
-                    <Pressable style={({ pressed }) => pressed && styles.pressed} onPress={skipHandler}>
+                    {/* <Pressable style={({ pressed }) => pressed && styles.pressed} onPress={skipHandler}>
                         <Text style={styles.text}> Skip </Text>
-                    </Pressable>
+                    </Pressable> */}
 
                     <Pressable onPress={nextHandler} style={[({ pressed }) => pressed && styles.pressed, styles.nextButton]}>
                         <View style={{ marginHorizontal: 10, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={[styles.text, { marginHorizontal: 15, color: Color.bg }]}> Next </Text>
+                            <Text style={[styles.text, { marginHorizontal: 15, color: Color.bg }]}>Get Started </Text>
                             <Ionicons name="arrow-forward" color={Color.bg} size={30} />
                         </View>
                     </Pressable>
@@ -62,7 +57,7 @@ function FirstScreen() {
     )
 }
 
-export default FirstScreen;
+export default ThirdScreen;
 
 const styles = StyleSheet.create({
     pressed: {
@@ -87,7 +82,7 @@ const styles = StyleSheet.create({
         marginVertical: 90,
         marginHorizontal: 10,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
     },
     swiperTextHolder: {
         marginHorizontal: 10,

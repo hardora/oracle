@@ -10,7 +10,7 @@ const SplashScreen = ({ navigation }) => {
         setTimeout(() => {
             navigation.navigate('Home');
         }, 3000);
-    }, [navigation])
+    }, [])
 
     return (
         <>

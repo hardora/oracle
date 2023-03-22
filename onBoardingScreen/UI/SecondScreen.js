@@ -1,11 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { View, StyleSheet, SafeAreaView, Image, Pressable, Text, ScrollView } from "react-native";
 import { Color } from "../../constant/Color";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 
-function FirstScreen() {
+function SecondScreen({ navigation }) {
 
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
     function skipHandler() {
         navigation.navigate('Dashboard');
@@ -13,7 +13,7 @@ function FirstScreen() {
         // navigation.goBack();
     }
     function nextHandler() {
-        navigation.navigate('SecondScreen');
+        navigation.navigate('ThirdScreen');
     }
 
     return (
@@ -21,8 +21,8 @@ function FirstScreen() {
             <View style={styles.container} >
                 <SafeAreaView>
                     <View style={styles.nobHolder}>
-                        <View style={[styles.nob, styles.activeNob]} ></View>
                         <View style={[styles.nob, styles.defaultNob]} ></View>
+                        <View style={[styles.nob, styles.activeNob]} ></View>
                         <View style={[styles.nob, styles.defaultNob]} ></View>
                     </View>
                 </SafeAreaView>
@@ -30,15 +30,15 @@ function FirstScreen() {
                     <Image source={require('../../assets/images/logo_s.png')} />
                 </View>
                 <View style={styles.imageHolder} >
-                    <Image source={require('../../assets/images/decentralized.png')} />
+                    <Image resizeMode='contain' style={{}} source={require('../../assets/images/mobile-first.png')} />
                 </View>
 
                 <View style={styles.swiperTextHolder}>
-                    <Text style={styles.italyText}>Fast,</Text>
-                    <Text style={styles.italyText}>Secure, and</Text>
-                    <Text style={styles.boldText}>Decentralized</Text>
-                    <Text style={styles.description}>A decentralized node system that removes
-                        he hurdle of third-party interference/delay.
+                    <Text style={styles.italyText}>High</Text>
+                    <Text style={styles.italyText}>Scalability and,</Text>
+                    <Text style={styles.boldText}>Mobile-First</Text>
+                    <Text style={styles.description}>Scalable hardware oracle that is
+                        designed to run on your mobile device faster and on the go.
                     </Text>
                 </View>
 
@@ -62,7 +62,7 @@ function FirstScreen() {
     )
 }
 
-export default FirstScreen;
+export default SecondScreen;
 
 const styles = StyleSheet.create({
     pressed: {

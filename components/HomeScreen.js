@@ -5,7 +5,7 @@ import { Color } from '../constant/Color';
 export default function App() {
     return (
         <View style={styles.container}>
-
+            <Text> This is react native expo</Text>
         </View>
     );
 }

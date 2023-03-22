@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from './components/SplashScreen';
+import HomeScreen from './components/HomeScreen';
 import FirstScreen from './onBoardingScreen/UI/FirstScreen';
-// import HomeScreen from './components/HomeScreen';
+import SecondScreen from './onBoardingScreen/UI/SecondScreen';
+import ThirdScreen from './onBoardingScreen/UI/ThirdScreen';
 // import onBoardingScreen from './onBoardingScreen';
 // import OnBoardingSwiper from './onBoardingScreen/OnBoardingSwiper';
 // import ScreenBoarding from './onBoardingScreen/ScreenBoarding';
@@ -22,6 +24,24 @@ const App = () => {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen name="Home" component={FirstScreen}
+                    options={{
+                        headerLeft: () => null,
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen name="Dashboard" component={HomeScreen}
+                    options={{
+                        headerLeft: () => null,
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen name="SecondScreen" component={SecondScreen}
+                    options={{
+                        headerLeft: () => null,
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen name="ThirdScreen" component={ThirdScreen}
                     options={{
                         headerLeft: () => null,
                         headerShown: false,
