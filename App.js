@@ -6,6 +6,7 @@ import HomeScreen from './components/HomeScreen';
 import FirstScreen from './onBoardingScreen/UI/FirstScreen';
 import SecondScreen from './onBoardingScreen/UI/SecondScreen';
 import ThirdScreen from './onBoardingScreen/UI/ThirdScreen';
+import CreateWalletScreen from './components/CreateWalletScreen';
 // import onBoardingScreen from './onBoardingScreen';
 // import OnBoardingSwiper from './onBoardingScreen/OnBoardingSwiper';
 // import ScreenBoarding from './onBoardingScreen/ScreenBoarding';
@@ -29,7 +30,7 @@ const App = () => {
                         headerShown: false,
                     }}
                 />
-                <Stack.Screen name="Dashboard" component={HomeScreen}
+                <Stack.Screen name="Dashboard" component={CreateWalletScreen}
                     options={{
                         headerLeft: () => null,
                         headerShown: false,
