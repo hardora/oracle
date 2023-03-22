@@ -34,11 +34,12 @@ function FirstScreen() {
             </View>
 
             <View style={styles.buttonHolder}>
-                <Pressable onPress={skipHandler}>
+
+                <Pressable style={({ pressed }) => pressed && styles.pressed} onPress={skipHandler}>
                     <Text style={styles.text}> Skip </Text>
                 </Pressable>
 
-                <Pressable style={styles.nextButton}>
+                <Pressable style={[styles.nextButton, ({ pressed }) => pressed && styles.pressed]}>
                     <View style={{ marginHorizontal: 10, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={[styles.text, { marginHorizontal: 15, color: Color.bg }]}> Next </Text>
                         <Ionicons name="arrow-forward" color={Color.bg} size={30} />
@@ -54,6 +55,10 @@ function FirstScreen() {
 export default FirstScreen;
 
 const styles = StyleSheet.create({
+    pressed: {
+        opacity: 0.7
+
+    },
     nextButton: {
         backgroundColor: '#F5F5F5',
         padding: 10,
