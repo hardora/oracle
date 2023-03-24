@@ -1,3 +1,6 @@
+// import './global';
+// const Web3 = require('web3');
+
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -16,6 +19,15 @@ const Stack = createStackNavigator();
 
 const App = () => {
 
+    // function componentWillMount() {
+    // const web3 = new Web3(
+    //     new Web3.providers.HttpProvider('https://mainnet.infura.io/')
+    // );
+
+    // web3.eth.getBlock('latest').then(console.log)
+    // }
+    // componentWillMount();
+
     return (
         <NavigationContainer>
             <Stack.Navigator>
@@ -30,12 +42,6 @@ const App = () => {
                         headerShown: false,
                     }}
                 />
-                <Stack.Screen name="Dashboard" component={CreateWalletScreen}
-                    options={{
-                        headerLeft: () => null,
-                        headerShown: false,
-                    }}
-                />
                 <Stack.Screen name="SecondScreen" component={SecondScreen}
                     options={{
                         headerLeft: () => null,
@@ -43,6 +49,12 @@ const App = () => {
                     }}
                 />
                 <Stack.Screen name="ThirdScreen" component={ThirdScreen}
+                    options={{
+                        headerLeft: () => null,
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen name="Dashboard" component={CreateWalletScreen}
                     options={{
                         headerLeft: () => null,
                         headerShown: false,

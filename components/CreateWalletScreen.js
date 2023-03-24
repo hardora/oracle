@@ -30,10 +30,6 @@ function CreateWalletScreen({ navigation }) {
 
                 <View style={styles.buttonHolder}>
 
-                    {/* <Pressable style={({ pressed }) => pressed && styles.pressed} onPress={skipHandler}>
-                        <Text style={styles.text}> Skip </Text>
-                    </Pressable> */}
-
                     <Pressable onPress={nextHandler} style={[({ pressed }) => pressed && styles.pressed, styles.walletButton]}>
                         <View style={{ marginHorizontal: 80, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={[styles.text, { marginHorizontal: 15, color: Color.bg }]}>Create Node ID</Text>
