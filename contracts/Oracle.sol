@@ -4,7 +4,10 @@ pragma solidity ^0.8.0;
 contract Oracle {
     mapping(address => bool) public trustedDevices;
     mapping(bytes32 => uint256) public sessionData;
+    mapping(uint256 => address) public requests;
 
+    event DataRequested(uint256 requestId);
+    event DataReceived(uint256 requestId, bytes data, bytes credentials);
     event RequestData(address indexed user, bytes32 indexed sessionId);
     event DataVerified(bytes32 indexed sessionId, bool verified);
 
@@ -13,6 +16,23 @@ contract Oracle {
     // Function to generate a random number using block.timestamp and a salt
     function generateRandomNumber(uint256 salt) public view returns (uint256) {
         return uint256(keccak256(abi.encodePacked(block.timestamp, salt)));
+    }
+
+    function requestData() public {
+        uint256 requestId = uint256(
+            keccak256(abi.encodePacked(msg.sender, block.timestamp))
+        );
+        requests[requestId] = msg.sender;
+        emit DataRequested(requestId);
+    }
+
+    function receiveData(
+        uint256 requestId,
+        bytes calldata data,
+        bytes calldata credentials
+    ) public {
+        require(requests[requestId] == msg.sender, "Invalid sender");
+        emit DataReceived(requestId, data, credentials);
     }
 
     function verifyUserData(bytes32 sessionId, bool verified) public {
