@@ -1,90 +1,128 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract Hardora{
-    string public name ;
-    string public symbol;
-    uint8 public decimals;
-    uint256 public totalSupply;
-    mapping(address => uint256) public balanceOf;
-    mapping(address => mapping(address => uint256)) public allowance;
+contract Hardora is ERC20 {
+    address connext;
+    string public namee;
+    string public symboll;
+    uint8 public decimalss;
+    uint256 public totalSupplyy;
+    mapping(address => uint256) public balanceOff;
+    mapping(address => mapping(address => uint256)) public allowancee;
     mapping(address => bool) public isValidator;
     mapping(address => bool) public hasRequested;
     address[] public validators;
-    event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Transferr(address indexed from, address indexed to, uint256 value);
+    event Approvall(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
     event ValidatorAdded(address indexed validator);
     event Requested(address indexed validator);
-    constructor( string memory _name,
-        string memory _symbol,
-        uint8 _decimals,
-        uint256 _totalSupply) {
-        name = _name;
-        symbol = _symbol;
-        decimals = _decimals;
-        totalSupply = _totalSupply * 10 ** decimals;
-        balanceOf[msg.sender] = totalSupply;
+
+    constructor(
+        string memory _namee,
+        string memory _symboll,
+        uint8 _decimalss,
+        uint256 _totalSupplyy,
+        address _connext
+    ) ERC20("Hardora", "HAR") {
+        namee = _namee;
+        symboll = _symboll;
+        decimalss = _decimalss;
+        totalSupplyy = _totalSupplyy * 10 ** decimalss;
+        balanceOff[msg.sender] = totalSupplyy;
+        connext = _connext;
     }
+
     function addValidator(address _validator) public {
         require(!isValidator[_validator], "Validator already exists.");
         isValidator[_validator] = true;
         validators.push(_validator);
         emit ValidatorAdded(_validator);
     }
+
     function requestTokens() public {
         require(isValidator[msg.sender], "Only validators can request tokens.");
         require(!hasRequested[msg.sender], "Tokens already requested.");
 
         hasRequested[msg.sender] = true;
-        uint256 tokenAmount = totalSupply / validators.length;
-        balanceOf[msg.sender] += tokenAmount;
-        emit Transfer(address(this), msg.sender, tokenAmount);
+        uint256 tokenAmount = totalSupplyy / validators.length;
+        balanceOff[msg.sender] += tokenAmount;
+        emit Transferr(address(this), msg.sender, tokenAmount);
         emit Requested(msg.sender);
     }
-    function transfer(address _to, uint256 _value) public returns (bool success) {
-        require(balanceOf[msg.sender] >= _value, "Not enough balance.");
-        balanceOf[msg.sender] -= _value;
-        balanceOf[_to] += _value;
-        emit Transfer(msg.sender, _to, _value);
+
+    function transferr(
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(balanceOff[msg.sender] >= _value, "Not enough balance.");
+        balanceOff[msg.sender] -= _value;
+        balanceOff[_to] += _value;
+        emit Transferr(msg.sender, _to, _value);
         return true;
     }
-    function approve(address _spender, uint256 _value) public returns (bool success) {
-        allowance[msg.sender][_spender] = _value;
-        emit Approval(msg.sender, _spender, _value);
+
+    function approvee(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        allowancee[msg.sender][_spender] = _value;
+        emit Approvall(msg.sender, _spender, _value);
         return true;
     }
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        require(balanceOf[_from] >= _value, "Not enough balance.");
-        require(allowance[_from][msg.sender] >= _value, "Not enough allowance.");
-        balanceOf[_from] -= _value;
-        balanceOf[_to] += _value;
-        allowance[_from][msg.sender] -= _value;
-        emit Transfer(_from, _to, _value);
+
+    function transferFromm(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(balanceOff[_from] >= _value, "Not enough balance.");
+        require(
+            allowancee[_from][msg.sender] >= _value,
+            "Not enough allowancee."
+        );
+        balanceOff[_from] -= _value;
+        balanceOff[_to] += _value;
+        allowancee[_from][msg.sender] -= _value;
+        emit Transferr(_from, _to, _value);
         return true;
     }
-    function increaseAllowance(address _spender, uint256 _addedValue) public returns (bool success) {
-        allowance[msg.sender][_spender] += _addedValue;
-        emit Approval(msg.sender, _spender, allowance[msg.sender][_spender]);
+
+    function increaseallowanceee(
+        address _spender,
+        uint256 _addedValue
+    ) public returns (bool success) {
+        allowancee[msg.sender][_spender] += _addedValue;
+        emit Approvall(msg.sender, _spender, allowancee[msg.sender][_spender]);
         return true;
     }
-    function decreaseAllowance(address _spender, uint256 _subtractedValue) public returns (bool success) {
-        uint256 oldValue = allowance[msg.sender][_spender];
+
+    function decreaseallowancee(
+        address _spender,
+        uint256 _subtractedValue
+    ) public returns (bool success) {
+        uint256 oldValue = allowancee[msg.sender][_spender];
         if (_subtractedValue >= oldValue) {
-            allowance[msg.sender][_spender] = 0;
+            allowancee[msg.sender][_spender] = 0;
         } else {
-            allowance[msg.sender][_spender] = oldValue - _subtractedValue;
+            allowancee[msg.sender][_spender] = oldValue - _subtractedValue;
         }
-        emit Approval(msg.sender, _spender, allowance[msg.sender][_spender]);
+        emit Approvall(msg.sender, _spender, allowancee[msg.sender][_spender]);
         return true;
     }
-function burn(uint256 _value) public returns (bool success) {
-    require(balanceOf[msg.sender] >= _value, "Not enough balance.");
-    balanceOf[msg.sender] -= _value;
-    totalSupply -= _value;
-    emit Transfer(msg.sender, address(0), _value);
-    return true;
-}
 
+    function mint(address to, uint256 amount) public {
+        require(msg.sender == connext);
+        _mint(to, amount);
+    }
 
+    function burn(address from, uint256 amount) public {
+        require(msg.sender == connext);
+        _burn(from, amount);
+    }
 }
