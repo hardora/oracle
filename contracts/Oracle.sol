@@ -2,70 +2,146 @@
 pragma solidity ^0.8.0;
 
 contract Oracle {
-    mapping(address => bool) public trustedDevices;
-    mapping(bytes32 => uint256) public sessionData;
-    mapping(uint256 => address) public requests;
+    address public owner;
+    uint256 public currentSessionId;
+    uint256 public oracleResponse;
 
-    event DataRequested(uint256 requestId);
-    event DataReceived(uint256 requestId, bytes data, bytes credentials);
-    event RequestData(address indexed user, bytes32 indexed sessionId);
-    event DataVerified(bytes32 indexed sessionId, bool verified);
-
-    // Functions
-
-    // Function to generate a random number using block.timestamp and a salt
-    function generateRandomNumber(uint256 salt) public view returns (uint256) {
-        return uint256(keccak256(abi.encodePacked(block.timestamp, salt)));
+    struct Session {
+        address userAddress;
+        address deviceAddress;
+        string data;
+        bytes32 requestId;
     }
 
-    function requestData() public {
-        uint256 requestId = uint256(
-            keccak256(abi.encodePacked(msg.sender, block.timestamp))
-        );
-        requests[requestId] = msg.sender;
-        emit DataRequested(requestId);
+    struct UserInfo {
+        string name;
+        string email;
     }
 
-    function receiveData(
-        uint256 requestId,
-        bytes calldata data,
-        bytes calldata credentials
-    ) public {
-        require(requests[requestId] == msg.sender, "Invalid sender");
-        emit DataReceived(requestId, data, credentials);
+    struct DeviceInfo {
+        string deviceType;
     }
 
-    function verifyUserData(bytes32 sessionId, bool verified) public {
+    mapping(address => UserInfo) public userInformation;
+    mapping(address => DeviceInfo) public trustedDeviceInfo;
+    mapping(uint256 => Session) public sessionData;
+
+    constructor() {
+        owner = msg.sender;
+        currentSessionId = 0;
+    }
+
+    modifier onlyOwner() {
         require(
-            trustedDevices[msg.sender],
-            "Only trusted devices can verify data"
+            msg.sender == owner,
+            "Only the contract owner can call this function."
         );
-        sessionData[sessionId] = verified ? 1 : 0;
-        emit DataVerified(sessionId, verified);
+        _;
+    }
+    modifier onlyTrustedDevice() {
+        require(
+            bytes(trustedDeviceInfo[msg.sender].deviceType).length != 0,
+            "Only trusted devices can call this function."
+        );
+        _;
     }
 
-    // Function to handle requests for data verification
-    function requestDataVerification(bytes32 sessionId) public {
-        emit RequestData(msg.sender, sessionId);
+    function addUserInformation(
+        string memory _name,
+        string memory _email
+    ) public {
+        userInformation[msg.sender].name = _name;
+        userInformation[msg.sender].email = _email;
     }
 
-    // Function to handle location-based sensor data and validate it
-    function handleSensorData(
-        uint256 lat,
-        uint256 long
-    ) public pure returns (bool) {
-        // Perform some validation on the sensor data
-        return (lat != 0 && long != 0);
+    function addTrustedDeviceInfo(string memory _deviceType) public {
+        trustedDeviceInfo[msg.sender].deviceType = _deviceType;
     }
 
-    // Function to store session data
-    function storeSessionData(bytes32 sessionId, uint256 data) public {
-        sessionData[sessionId] = data;
+    function storeSessionData(
+        address _userAddress,
+        address _deviceAddress,
+        string memory _data,
+        bytes32 _requestId
+    ) public onlyOwner {
+        sessionData[currentSessionId].userAddress = _userAddress;
+        sessionData[currentSessionId].deviceAddress = _deviceAddress;
+        sessionData[currentSessionId].data = _data;
+        sessionData[currentSessionId].requestId = _requestId;
+        currentSessionId++;
     }
 
-    function addTrustedDevice(address device) public {
-        trustedDevices[device] = true;
+    function validateDataRequestAndOracleResponse(
+        uint256 _sessionId,
+        uint256 _response
+    ) private view returns (bool) {
+        // Check that the session exists
+        require(_sessionId < currentSessionId, "Session does not exist.");
+        // Check that the oracle response matches the data request
+        require(
+            sessionData[_sessionId].requestId == bytes32(_response),
+            "Invalid oracle response."
+        );
+        return true;
+    }
+
+    function fulfill(uint256 _sessionId, uint256 _response) public onlyOwner {
+        // Validate the data request and oracle response
+        require(
+            validateDataRequestAndOracleResponse(_sessionId, _response),
+            "Invalid data request or oracle response."
+        );
+        // Store the session data
+        storeSessionData(
+            sessionData[_sessionId].userAddress,
+            sessionData[_sessionId].deviceAddress,
+            sessionData[_sessionId].data,
+            sessionData[_sessionId].requestId
+        );
+        // Store the oracle response
+        oracleResponse = _response;
+    }
+
+    function requestDataFromDevice() public onlyTrustedDevice {
+        string memory data = "Sample data from trusted device.";
+        bytes32 requestId = keccak256(
+            abi.encodePacked(block.timestamp, msg.sender, data)
+        );
+        sessionData[currentSessionId].deviceAddress = msg.sender;
+        sessionData[currentSessionId].requestId = requestId;
+        sessionData[currentSessionId].data = data;
+        currentSessionId++;
+    }
+
+    function getSessionData(
+        uint256 _sessionId
+    ) public view returns (address, address, string memory, bytes32) {
+        require(_sessionId < currentSessionId, "Session does not exist.");
+        Session memory session = sessionData[_sessionId];
+        return (
+            session.userAddress,
+            session.deviceAddress,
+            session.data,
+            session.requestId
+        );
+    }
+
+    function getOracleResponse() public view returns (uint256) {
+        return oracleResponse;
+    }
+
+    function getUserInformation()
+        public
+        view
+        returns (string memory, string memory)
+    {
+        return (
+            userInformation[msg.sender].name,
+            userInformation[msg.sender].email
+        );
+    }
+
+    function getTrustedDeviceInfo() public view returns (string memory) {
+        return trustedDeviceInfo[msg.sender].deviceType;
     }
 }
-
-// Function to handle trusted devices information
