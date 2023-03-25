@@ -1,4 +1,4 @@
-# scale-ethereum
+# Hardora Oracle
 
 The Hardora Oracle is a decentralized, mobile-first, compute-enabled hardware oracle for off-chain data access and computation. The emphasis is on a decentralized, hardware-based, compute-enabled and mobile-first oracle for DApps built on existing blockchains to access off-chain data that is unavailable on-chain.
 
