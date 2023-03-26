@@ -1,15 +1,27 @@
-// SPDX-License-Identifier: MIT
-pragma solidity 0.8.17;
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.15;
 
-import {IConnext} from "@connext/smart-contracts/contracts/core/connext/interfaces/IConnext.sol";
-import './Hardora.sol';
+import {IConnext} from "@connext/interfaces/core/IConnext.sol";
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {Hardora} from "./Hardora.sol";
 
-Hardora token = new Hardora(address);
-contract Bridge{
- IConnext public immutable connext;
+// interface IWETH {
+//   function deposit() external payable;
+//   function approve(address guy, uint wad) external returns (bool);
+// }
+
+/**
+ * @title SimpleBridge
+ * @notice Example of a cross-domain token transfer.
+ */
+contract SimpleBridge {
+  // The connext contract on the origin domain
+  IConnext public immutable connext;
+
   constructor(address _connext) {
     connext = IConnext(_connext);
   }
+
   /**
    * @notice Transfers non-native assets from one chain to another.
    * @dev User should approve a spending allowance before calling this.
@@ -28,15 +40,19 @@ contract Bridge{
     uint256 slippage,
     uint256 relayerFee
   ) external payable {
-    Hardora _token = Hardora(token);
+    ERC20 _token = ERC20(token);
+
     require(
       _token.allowance(msg.sender, address(this)) >= amount,
       "User must approve amount"
     );
+
     // User sends funds to this contract
     _token.transferFrom(msg.sender, address(this), amount);
+
     // This contract approves transfer to Connext
     _token.approve(address(connext), amount);
+
     connext.xcall{value: relayerFee}(
       destinationDomain, // _destination: Domain ID of the destination chain
       recipient,         // _to: address receiving the funds on the destination
@@ -48,6 +64,16 @@ contract Bridge{
     );  
   }
 
+  /**
+   * @notice Transfers native assets from one chain to another.
+   * @param destinationUnwrapper Address of the Unwrapper contract on destination.
+   * @param weth Address of the WETH contract on this domain.
+   * @param amount The amount to transfer.
+   * @param recipient The destination address (e.g. a wallet).
+   * @param destinationDomain The destination domain ID.
+   * @param slippage The maximum amount of slippage the user will accept in BPS.
+   * @param relayerFee The fee offered to relayers.
+   */
   // function xTransferEth(
   //   address destinationUnwrapper,
   //   address weth,
@@ -59,10 +85,13 @@ contract Bridge{
   // ) external payable {
   //   // Wrap ETH into WETH to send with the xcall
   //   IWETH(weth).deposit{value: amount}();
+
   //   // This contract approves transfer to Connext
   //   IWETH(weth).approve(address(connext), amount);
+
   //   // Encode the recipient address for calldata
   //   bytes memory callData = abi.encode(recipient);
+
   //   // xcall the Unwrapper contract to unwrap WETH into ETH on destination
   //   connext.xcall{value: relayerFee}(
   //     destinationDomain,    // _destination: Domain ID of the destination chain
@@ -74,6 +103,4 @@ contract Bridge{
   //     callData              // _callData: calldata with encoded recipient address
   //   );  
   // }
-
 }
-
