@@ -44,4 +44,5 @@ Possible data services provided by the protocol include:
 5. Retrieving location-specific temperature data
 6. File hash computations and many more. 
 
-##Link to our slide: https://www.canva.com/design/DAFd7b8N4T4/H_jc4Fth9K3XHsvhQbp72g/view?utm_content=DAFd7b8N4T4&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink
+## Link to our slide: 
+https://www.canva.com/design/DAFd7b8N4T4/H_jc4Fth9K3XHsvhQbp72g/view?utm_content=DAFd7b8N4T4&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink
