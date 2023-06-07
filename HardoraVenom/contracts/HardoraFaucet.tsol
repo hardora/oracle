@@ -1,0 +1,86 @@
+pragma ever-solidity >= 0.61.2;
+pragma AbiHeader expire;
+pragma AbiHeader pubkey;
+
+import "tip3/contracts/interfaces/IAcceptTokensMintCallback.sol";
+import "tip3/contracts/interfaces/ITokenRoot.sol";
+
+contract HardoraFaucet is IAcceptTokensMintCallback {
+    address static owner;
+
+    uint state;
+    address public distributedTokenRoot; // TIP3 TokenRoot address for deploying wallet for Tokensale. This token will be distributed
+    address public distributedTokenWallet; // TIP3 wallet for Tokensale for sending purchased tokens
+
+    event StateChange(uint _state);
+
+    constructor(
+        uint _state,
+        address _distributedTokenRoot
+    ) public {
+        tvm.accept();
+        distributedTokenRoot = _distributedTokenRoot;
+
+        ITokenRoot(distributedTokenRoot).deployWallet {
+            value: 0.2 ever,
+            flag: 1,
+            callback: HardoraFaucet.HardoraWallet // this callback will be called by TokenRoot after deploying wallet for faucets claim
+        } (
+            address(this),
+            0.1 ever
+        );
+        setState(_state);
+    }
+
+    function HardoraWallet(address _wallet) external {
+        require (msg.sender == distributedTokenRoot, 201);
+        distributedTokenWallet = _wallet;
+    }
+
+    // function onAcceptTokensTransfer(
+    //     address root,
+    //     uint128 amount,
+    //     address sender,
+    //     address senderWallet,
+    //     address remainingGasTo,
+    //     TvmCell payload
+    // ) external override {
+    //     require (senderWallet == distributedTokenWallet, 202);
+    //     remainingGasTo.transfer({value: 0, flag: 64, bounce: false});
+
+    //     root;
+    //     remainingGasTo;
+    //     payload;
+    // }
+
+    function onAcceptTokensMint(
+        address tokenRoot,
+        uint128 amount,
+        address remainingGasTo,
+        TvmCell payload
+    ) external override {
+        require (tokenRoot == distributedTokenRoot, 203);
+        require(msg.sender == distributedTokenRoot, 204);
+        remainingGasTo.transfer({value: 0, flag: 64, bounce: false});
+
+        tokenRoot;
+        amount;
+        payload;
+    }
+
+    function setState(uint _state) public {
+        tvm.accept();
+        state = _state;
+
+        emit StateChange(_state);
+    }
+
+    function getDetails()
+        external
+        view
+    returns (
+        uint _state
+    ) {
+        return state;
+    }
+}
