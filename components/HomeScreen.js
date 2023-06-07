@@ -1,10 +1,30 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  function nextHandlerHome() {
+    navigation.navigate("AccountDashboard");
+  }
+  function nextHandler() {
+    navigation.navigate("TrustedDevices");
+  }
+  function nextHandlerStake() {
+    navigation.navigate("StakeToken");
+  }
+  function nextHandlerAccount() {
+    navigation.navigate("AccountInformation");
+  }
+  function nextHandlerDevice() {
+    navigation.navigate("DeviceInfo");
+  }
+  function nextHandlerSettings() {
+    navigation.navigate("Settings");
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -67,38 +87,50 @@ export default function HomeScreen() {
       </View>
       <View style={styles.account}>
         <View>
-          <View style={styles.clicks}>
-            <Ionicons name="add-circle-outline" color="#ffc000" size={30} />
-            <Text style={styles.click}>Connect Trusted Device</Text>
-          </View>
-          <View style={styles.clicks}>
-            <Ionicons name="wallet-outline" color="#ffc000" size={30} />
-            <Text style={styles.click}>Stake Token</Text>
-          </View>
-          <View style={styles.clicks}>
-            <Ionicons
-              name="document-attach-outline"
-              color="#ffc000"
-              size={30}
-            />
-            <Text style={styles.click}>Account Information</Text>
-          </View>
-          <View style={styles.clicks}>
-            <Ionicons
-              name="information-circle-outline"
-              color="#ffc000"
-              size={30}
-            />
-            <Text style={styles.click}>Trusted Device Info</Text>
-          </View>
-          <View style={styles.clicks}>
-            <Ionicons name="settings-outline" color="#ffc000" size={30} />
-            <Text style={styles.click}>Settings</Text>
-          </View>
+          <Pressable onPress={nextHandler}>
+            <View style={styles.clicks}>
+              <Ionicons name="add-circle-outline" color="#ffc000" size={30} />
+              <Text style={styles.click}>Connect Trusted Device</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={nextHandlerStake}>
+            <View style={styles.clicks}>
+              <Ionicons name="wallet-outline" color="#ffc000" size={30} />
+              <Text style={styles.click}>Stake Token</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={nextHandlerAccount}>
+            <View style={styles.clicks}>
+              <Ionicons
+                name="document-attach-outline"
+                color="#ffc000"
+                size={30}
+              />
+              <Text style={styles.click}>Account Information</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={nextHandlerDevice}>
+            <View style={styles.clicks}>
+              <Ionicons
+                name="information-circle-outline"
+                color="#ffc000"
+                size={30}
+              />
+              <Text style={styles.click}>Trusted Device Info</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={nextHandlerSettings}>
+            <View style={styles.clicks}>
+              <Ionicons name="settings-outline" color="#ffc000" size={30} />
+              <Text style={styles.click}>Settings</Text>
+            </View>
+          </Pressable>
         </View>
-        <View style={styles.home}>
-          <Ionicons name="home-outline" color="#ffc000" size={30} />
-        </View>
+        <Pressable onPress={nextHandlerHome}>
+          <View style={styles.home}>
+            <Ionicons name="home-outline" color="#ffc000" size={30} />
+          </View>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
