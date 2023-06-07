@@ -14,6 +14,11 @@ import SetupWalletScreen from "./components/SetupWalletScreen";
 import VerifyScreen from "./components/VerifyScreen";
 import Create from "./components/ProceedToHome";
 import ProceedToHome from "./components/ProceedToHome";
+import ConnectTrustedDevices from "./components/ConnectTrustedDevice";
+import StakeToken from "./components/StakeToken";
+import AccountInformation from "./components/AccountInformation";
+import DeviceInfo from "./components/DeviceInfo";
+import Settings from "./components/Settings";
 // import onBoardingScreen from './onBoardingScreen';
 // import OnBoardingSwiper from './onBoardingScreen/OnBoardingSwiper';
 // import ScreenBoarding from './onBoardingScreen/ScreenBoarding';
@@ -105,6 +110,46 @@ const App = () => {
         <Stack.Screen
           name="Proceed"
           component={ProceedToHome}
+          options={{
+            headerLeft: () => null,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="TrustedDevices"
+          component={ConnectTrustedDevices}
+          options={{
+            headerLeft: () => null,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="StakeToken"
+          component={StakeToken}
+          options={{
+            headerLeft: () => null,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="AccountInformation"
+          component={AccountInformation}
+          options={{
+            headerLeft: () => null,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="DeviceInfo"
+          component={DeviceInfo}
+          options={{
+            headerLeft: () => null,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
           options={{
             headerLeft: () => null,
             headerShown: false,
