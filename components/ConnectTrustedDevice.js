@@ -17,11 +17,17 @@ export default function ConnectTrustedDevices() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <View>
-          <Text style={styles.textBig}>Connect Trusted Device</Text>
+        <View style={styles.row}>
+          <Ionicons
+            onPress={nextHandlerHome}
+            name="arrow-back-outline"
+            color="white"
+            size={30}
+          />
+          <Text style={styles.text}>Connect Trusted Device</Text>
         </View>
 
-        <View>
+        <View style={styles.col}>
           <Image source={require("../assets/images/cpu-setting.png")} />
           <Text style={styles.description}>
             Please insert device and click the button below
@@ -30,7 +36,7 @@ export default function ConnectTrustedDevices() {
 
         <View style={styles.buttonHolder}>
           <Pressable
-            onPress={nextHandler}
+            onPress={nextHandlerHome}
             style={
               ([({ pressed }) => pressed && styles.pressed], styles.nextButton)
             }
@@ -46,7 +52,7 @@ export default function ConnectTrustedDevices() {
         </View>
         <Pressable onPress={nextHandlerHome}>
           <View style={styles.home}>
-            <Ionicons name="home-outline" color="#ffc000" size={30} />
+            <Ionicons name="home-outline" color="#f5f5f5" size={30} />
           </View>
         </Pressable>
       </View>
@@ -58,17 +64,31 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.7,
   },
+  row: {
+    flexDirection: "row",
+    marginHorizontal: 20,
+    justifyContent: "space-between",
+    marginVertical: 40,
+  },
+  col: {
+    flexDirection: "column",
+    marginHorizontal: 20,
+    justifyContent: "space-between",
+    marginVertical: 10,
+    alignItems: "center",
+  },
   description: {
-    fontSize: 18,
+    fontSize: 22,
     textAlign: "center",
     color: "white",
-    paddingHorizontal: 20,
+    paddingHorizontal: 60,
+    marginVertical: 10,
   },
   nextButton: {
     backgroundColor: "#ffc000",
     padding: 5,
     borderRadius: 35,
-    marginVertical: 30,
+    marginTop: 100,
   },
   next: {
     backgroundColor: "#ffc000",
@@ -79,7 +99,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
-    textAlign: "center",
     color: "white",
   },
   textBig: {
@@ -108,6 +127,5 @@ const styles = StyleSheet.create({
     width: "20%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: 15,
   },
 });

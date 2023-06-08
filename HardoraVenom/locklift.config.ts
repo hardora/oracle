@@ -103,7 +103,7 @@ const config: LockliftConfig = {
       },
       giver: {
         address: "0:c9026e9823ccbfba1472b893b6c1fee057779e5df0042604db5df372b64cc962",
-        phrase: "again satisfy giant please emerge cherry august chest bright special youth length",
+        phrase: "...",
         accountId: 0,
       },
       tracing: {

@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import { ImageBackground } from "react-native";
 import { Image, Pressable } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -21,44 +22,50 @@ export default function SetupWalletScreen() {
           <Text style={styles.text}>Seed Phrase</Text>
         </View>
 
-        <View style={styles.seeds}>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-          <Text style={styles.seed}>1. Seed</Text>
-        </View>
-
-        <View style={styles.buttonHolder}>
-          <View>
-            <Text style={styles.description}>
-              This seed phrase is important as it can be used to recover your
-              account. Please write down in a secure place.
-            </Text>
+        <ImageBackground
+          source={require("../assets/images/bg.png")}
+          resizeMode="cover"
+        >
+          <View style={styles.seeds}>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
+            <Text style={styles.seed}>1. Seed</Text>
           </View>
 
-          <Pressable
-            onPress={nextHandler}
-            style={
-              ([({ pressed }) => pressed && styles.pressed], styles.nextButton)
-            }
-          >
-            <View
-              style={{
-                marginHorizontal: 10,
-              }}
-            >
-              <Text style={styles.next}>Continue To Verify</Text>
+          <View style={styles.buttonHolder}>
+            <View>
+              <Text style={styles.description}>
+                This seed phrase is important as it can be used to recover your
+                account. Please write down in a secure place.
+              </Text>
             </View>
-          </Pressable>
-        </View>
+
+            <Pressable
+              onPress={nextHandler}
+              style={
+                ([({ pressed }) => pressed && styles.pressed],
+                styles.nextButton)
+              }
+            >
+              <View
+                style={{
+                  marginHorizontal: 10,
+                }}
+              >
+                <Text style={styles.next}>Continue To Verify</Text>
+              </View>
+            </Pressable>
+          </View>
+        </ImageBackground>
       </View>
     </SafeAreaView>
   );

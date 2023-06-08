@@ -46,7 +46,7 @@ export default function Settings() {
         </View>
         <Pressable onPress={nextHandlerHome}>
           <View style={styles.home}>
-            <Ionicons name="home-outline" color="#ffc000" size={30} />
+            <Ionicons name="home-outline" color="#f5f5f5" size={30} />
           </View>
         </Pressable>
       </View>

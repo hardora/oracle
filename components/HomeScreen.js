@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
 import { useNavigation } from "@react-navigation/native";
+import { ImageBackground } from "react-native";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -27,23 +28,24 @@ export default function HomeScreen() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text style={styles.text}>
-          {" "}
-          <Ionicons name="add-outline" color="white" size={30} /> Add Username
-        </Text>
+      <View style={styles.right}>
+        <Ionicons name="add-outline" color="#f5f5f5" size={30} />
+        <Text style={styles.text}>Add Username</Text>
       </View>
       <View>
-        <View style={styles.row}>
+        <View style={styles.rowed}>
           <Text style={styles.text}>Available Balance</Text>
-          <Ionicons name="alarm" color="white" size={30} />
+          <Ionicons name="alarm" color="#f5f5f5" size={30} />
+        </View>
+        <View style={styles.accountInfo}>
+          <Image
+            source={require("../assets/images/app-logo.png")}
+            style={styles.logo}
+          />
+          <Text style={styles.amount}>23.008</Text>
         </View>
         <View style={styles.line}>
-          <Image source={require("../assets/images/layer.png")} />
-          <Text style={styles.text}>23.008</Text>
-        </View>
-        <View style={styles.line}>
-          <Text style={styles.text}>Equiv: 5500.27</Text>
+          <Text style={styles.text}>Equiv: $500.27</Text>
           <Text style={styles.text}>Validation: 17</Text>
         </View>
         <View style={styles.row}>
@@ -54,7 +56,7 @@ export default function HomeScreen() {
               color={Color.bg}
               size={24}
             />
-            <Text style={styles.text}>Buy</Text>
+            <Text style={styles.action}>Buy</Text>
           </View>
           <View style={styles.col}>
             <Ionicons
@@ -63,7 +65,7 @@ export default function HomeScreen() {
               color={Color.bg}
               size={24}
             />
-            <Text style={styles.text}>Receive</Text>
+            <Text style={styles.action}>Receive</Text>
           </View>
           <View style={styles.col}>
             <Ionicons
@@ -72,7 +74,7 @@ export default function HomeScreen() {
               color={Color.bg}
               size={24}
             />
-            <Text style={styles.text}>Send</Text>
+            <Text style={styles.action}>Send</Text>
           </View>
           <View style={styles.col}>
             <Ionicons
@@ -81,57 +83,62 @@ export default function HomeScreen() {
               color={Color.bg}
               size={24}
             />
-            <Text style={styles.text}>More</Text>
+            <Text style={styles.action}>More</Text>
           </View>
         </View>
       </View>
-      <View style={styles.account}>
-        <View>
-          <Pressable onPress={nextHandler}>
-            <View style={styles.clicks}>
-              <Ionicons name="add-circle-outline" color="#ffc000" size={30} />
-              <Text style={styles.click}>Connect Trusted Device</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={nextHandlerStake}>
-            <View style={styles.clicks}>
-              <Ionicons name="wallet-outline" color="#ffc000" size={30} />
-              <Text style={styles.click}>Stake Token</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={nextHandlerAccount}>
-            <View style={styles.clicks}>
-              <Ionicons
-                name="document-attach-outline"
-                color="#ffc000"
-                size={30}
-              />
-              <Text style={styles.click}>Account Information</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={nextHandlerDevice}>
-            <View style={styles.clicks}>
-              <Ionicons
-                name="information-circle-outline"
-                color="#ffc000"
-                size={30}
-              />
-              <Text style={styles.click}>Trusted Device Info</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={nextHandlerSettings}>
-            <View style={styles.clicks}>
-              <Ionicons name="settings-outline" color="#ffc000" size={30} />
-              <Text style={styles.click}>Settings</Text>
+      <ImageBackground
+        source={require("../assets/images/bg2.png")}
+        resizeMode="cover"
+      >
+        <View style={styles.account}>
+          <View>
+            <Pressable onPress={nextHandler}>
+              <View style={styles.clicks}>
+                <Ionicons name="add-circle-outline" color="#ffc000" size={30} />
+                <Text style={styles.click}>Connect Trusted Device</Text>
+              </View>
+            </Pressable>
+            <Pressable onPress={nextHandlerStake}>
+              <View style={styles.clicks}>
+                <Ionicons name="wallet-outline" color="#ffc000" size={30} />
+                <Text style={styles.click}>Stake Token</Text>
+              </View>
+            </Pressable>
+            <Pressable onPress={nextHandlerAccount}>
+              <View style={styles.clicks}>
+                <Ionicons
+                  name="document-attach-outline"
+                  color="#ffc000"
+                  size={30}
+                />
+                <Text style={styles.click}>Account Information</Text>
+              </View>
+            </Pressable>
+            <Pressable onPress={nextHandlerDevice}>
+              <View style={styles.clicks}>
+                <Ionicons
+                  name="information-circle-outline"
+                  color="#ffc000"
+                  size={30}
+                />
+                <Text style={styles.click}>Trusted Device Info</Text>
+              </View>
+            </Pressable>
+            <Pressable>
+              <View style={styles.clicks}>
+                <Ionicons name="settings-outline" color="#ffc000" size={30} />
+                <Text style={styles.click}>Settings</Text>
+              </View>
+            </Pressable>
+          </View>
+          <Pressable onPress={nextHandlerHome}>
+            <View style={styles.home}>
+              <Ionicons name="home-outline" color="#f5f5f5" size={30} />
             </View>
           </Pressable>
         </View>
-        <Pressable onPress={nextHandlerHome}>
-          <View style={styles.home}>
-            <Ionicons name="home-outline" color="#ffc000" size={30} />
-          </View>
-        </Pressable>
-      </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -141,35 +148,66 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Color.bg,
   },
+  right: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    gap: 10,
+    marginVertical: 10,
+  },
+  logo: { width: 20, height: 20 },
   text: {
-    color: "white",
-    fontSize: 16,
+    color: "#f5f5f5",
+    fontSize: 20,
+    marginHorizontal: 20,
+    marginVertical: 5,
+  },
+  action: {
+    color: "#f5f5f5",
+    fontSize: 20,
+    marginVertical: 5,
+  },
+  amount: {
+    color: "#f5f5f5",
+    marginHorizontal: 10,
+    fontSize: 40,
+    fontWeight: 700,
   },
   row: {
     flexDirection: "row",
-    marginVertical: 20,
+    marginVertical: 10,
     justifyContent: "space-between",
     width: "60%",
     marginHorizontal: 20,
     alignItems: "center",
   },
+  rowed: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 10,
+  },
+  accountInfo: {
+    flexDirection: "row",
+    marginLeft: 30,
+    alignItems: "center",
+  },
   line: {
     flexDirection: "row",
-    gap: 20,
     alignItems: "center",
-    marginHorizontal: 20,
+    marginHorizontal: 10,
   },
   col: {
     alignItems: "center",
-    gap: 10,
+    gap: 5,
   },
   ion: {
     padding: 12,
-    backgroundColor: "white",
+    backgroundColor: "#f5f5f5",
     borderRadius: 10,
   },
   account: {
-    backgroundColor: "white",
+    backgroundColor: "#f5f5f5",
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
@@ -185,7 +223,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   click: {
-    color: "white",
+    color: "#f5f5f5",
     fontSize: 24,
   },
   home: {

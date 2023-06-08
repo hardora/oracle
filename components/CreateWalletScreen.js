@@ -61,7 +61,6 @@ function CreateWalletScreen() {
           </Pressable>
 
           <Pressable
-            onPress={nextHandler}
             style={[
               ({ pressed }) => pressed && styles.pressed,
               styles.importButton,
@@ -76,11 +75,14 @@ function CreateWalletScreen() {
               }}
             >
               <Text
-                style={[styles.text, { marginHorizontal: 15, color: "white" }]}
+                style={[
+                  styles.text,
+                  { marginHorizontal: 15, color: "#f5f5f5" },
+                ]}
               >
                 Import Existing ID{" "}
               </Text>
-              <MaterialIcons name="import-export" color="white" size={30} />
+              <MaterialIcons name="import-export" color="#f5f5f5" size={30} />
             </View>
           </Pressable>
         </View>
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 25,
     marginVertical: 20,
-    borderColor: "white",
+    borderColor: "#f5f5f5",
     borderWidth: 1,
   },
 
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   description: {
-    color: "white",
+    color: "#f5f5f5",
     marginTop: 10,
     fontSize: 36,
     fontWeight: 700,
