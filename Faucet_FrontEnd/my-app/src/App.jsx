@@ -1,4 +1,4 @@
-import "./App.css";
+{/**import "./App.css";
 import React, { useState, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { FaDiscord, FaTwitter, FaTelegram } from "react-icons/fa";
@@ -171,3 +171,4 @@ function App() {
 }
 
 export default App;
+*/}
