@@ -4,13 +4,14 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { FaDiscord, FaTwitter, FaTelegram } from "react-icons/fa";
 import { Address, ProviderRpcClient } from "everscale-inpage-provider";
 import { EverscaleStandaloneClient } from "everscale-standalone-client";
-import Faucet from "./faucetAbi";
+//import Faucet from "./faucetAbi";
+import emailjs from "emailjs-com";
 
-function App() {
+function AppTop() {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [faucetAddress, setFaucetAddress] = useState("");
-  const [faucetContract, setFaucetContract] = useState(null);
+  //const [faucetContract, setFaucetContract] = useState(null);
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
   const handleCaptchaChange = (res) => {
@@ -21,51 +22,34 @@ function App() {
     e.preventDefault();
   };
 
-  //frontend integration
-  useEffect(() => {
-    const initializeFaucet = async () => {
-      const client = new ProviderRpcClient({
-        forceUseFallback: true,
-        fallback: () =>
-          EverscaleStandaloneClient.create({
-            connection: {
-              id: 1002,
-              type: "jrpc",
-              data: {
-                endpoints: ["https://jrpc-devnet.venom.foundation/rpc"],
-              },
-            },
-            initInput: "../../node_modules/nekoton-wasm/nekoton_wasm_bg.wasm",
-          }),
-      });
-
-      const FaucetAddress = new Address(
-        "0:7a04abb7e385f3aaf8c0ca6579949fd7b46ffbd709b533b5cffe7ebe41764db0"
-      );
-      const FaucetContract = new client.Contract(Faucet, FaucetAddress);
-      setFaucetContract(FaucetContract);
-      setFaucetAddress(FaucetAddress);
-    };
-
-    initializeFaucet();
-  }, []);
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
     if (isCaptchaVerified) {
       try {
-        const transaction = await faucetContract.methods
-          .mint({
-            address: "",
-          })
-          .send({
-            from: faucetAddress,
-            amount: "10",
-            bounce: true,
-          });
-        console.log(transaction);
+        // Send email using emailjs
+        await emailjs.send(
+          "service_1v8l5j4",
+          "template_twj7zn9",
+          {
+            to_email: "boyejofemi2014@gmail.com",
+            from_name: address,
+            message: description,
+          },
+          "EK04mlc-t5tm-hZjF"
+        );
+
+        // Reset form fields and captcha verification
+        setAddress("");
+        setDescription("");
+        setIsCaptchaVerified(false);
+
+        // Display success message or perform any other actions
+        alert("Token sent successfully!");
       } catch (error) {
-        console.error("Error sending tokens:", error);
+        console.error("Error sending Token:", error);
+        // Display error message or perform any other error handling
+        alert("Error sending Tokens. Please try again later.");
       }
     } else {
       alert("Please verify that you are not a robot.");
@@ -170,4 +154,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppTop;
