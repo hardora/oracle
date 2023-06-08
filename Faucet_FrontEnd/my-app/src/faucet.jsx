@@ -9,9 +9,6 @@ function FaucetRequest() {
   const [description, setDescription] = useState("");
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
-  const faucetAddress =
-    "0:7a04abb7e385f3aaf8c0ca6579949fd7b46ffbd709b533b5cffe7ebe41764db0";
-
   const handleCaptchaChange = (res) => {
     setIsCaptchaVerified(true);
   };
@@ -64,7 +61,7 @@ function FaucetRequest() {
         height={"50px"}
       />
       <div className="w-full h-screen flex flex-col items-center justify-center bg-custom text-white px-0 md:px-0 lg:px-0 md:py-5 lg:py-5">
-        <h1 className="font-semibold text-xl md:text-4xl lg:text-4xl pt-5">
+        <h1 className="font-semibold text-2xl md:text-4xl lg:text-4xl pt-5">
           Hardora Faucet for Developers
         </h1>
         <p className="text-gray-400 py-5 text-sm md:text-base lg:text-base">
@@ -133,8 +130,7 @@ function FaucetRequest() {
           </div>
 
           <p className="text-gray-400 pb-6 text-center">
-            Testnet HARDORA tokens are sent from:
-            <p className="text-xs">{faucetAddress}</p>
+            Testnet HARDORA tokens are sent immediately
           </p>
         </form>
 
