@@ -1,26 +1,17 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { FaDiscord, FaTwitter, FaTelegram } from "react-icons/fa";
-import { ProviderRpcClient } from "everscale-inpage-provider";
+import { Address, ProviderRpcClient } from "everscale-inpage-provider";
 import { EverscaleStandaloneClient } from "everscale-standalone-client";
-
 import Faucet from "./faucetAbi";
 
-function App() {
+async function App() {
   const [address, setAddress] = useState("");
-  const [deployWalletValue, setDeployWalletValue] = useState(10);
-  const [minted, setMinted] = useState(false);
   const [description, setDescription] = useState("");
-
+  const [faucetAddress, setFaucetAddress] = useState("");
+  const [faucetContract, setFaucetContract] = useState(null);
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    if (!isCaptchaVerified) {
-      alert("Please verify that you are not a robot.");
-    }
-  };
 
   const handleCaptchaChange = (res) => {
     setIsCaptchaVerified(true);
@@ -28,6 +19,57 @@ function App() {
 
   const handleChange = (e) => {
     e.preventDefault();
+  };
+
+  //frontend integration
+  useEffect(() => {
+    const initializeFaucet = async () => {
+      const client = new ProviderRpcClient({
+        forceUseFallback: true,
+        fallback: () =>
+          EverscaleStandaloneClient.create({
+            connection: {
+              id: 1002,
+              type: "jrpc",
+              data: {
+                endpoints: ["https://jrpc-devnet.venom.foundation/rpc"],
+              },
+            },
+            initInput: "../../node_modules/nekoton-wasm/nekoton_wasm_bg.wasm",
+          }),
+      });
+
+      const FaucetAddress = new Address(
+        "0:7a04abb7e385f3aaf8c0ca6579949fd7b46ffbd709b533b5cffe7ebe41764db0"
+      );
+      const FaucetContract = new client.Contract(Faucet, FaucetAddress);
+      setFaucetContract(FaucetContract);
+      setFaucetAddress(FaucetAddress);
+    };
+
+    initializeFaucet();
+  }, []);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    if (!isCaptchaVerified) {
+      try {
+        const transaction = await faucetContract.methods
+          .mint({
+            address: address,
+          })
+          .send({
+            from: faucetAddress,
+            amount: "10",
+            bounce: true,
+          });
+        console.log(transaction);
+      } catch (error) {
+        console.error("Error sending tokens:", error);
+      }
+    } else {
+      alert("Please verify that you are not a robot.");
+    }
   };
 
   return (
@@ -93,27 +135,23 @@ function App() {
           </div>
 
           <div className="py-6">
-            {!minted ? (
-              <button
-                className="w-full h-10 bg-gold rounded-lg "
-                type="submit"
-                disabled={!address || !description}
-                style={
-                  !address || !description
-                    ? { backgroundColor: "#bb9f01", color: "gray" }
-                    : { backgroundColor: "#ffd900", color: "white" }
-                }
-                onClick={handleFormSubmit}
-              >
-                Request Testnet HARDORA tokens
-              </button>
-            ) : (
-              alert("Token Sent successfully!")
-            )}
+            <button
+              className="w-full h-10 bg-gold rounded-lg "
+              type="submit"
+              disabled={!address || !description}
+              style={
+                !address || !description
+                  ? { backgroundColor: "#bb9f01", color: "gray" }
+                  : { backgroundColor: "#ffd900", color: "white" }
+              }
+              onClick={handleFormSubmit}
+            >
+              Request Testnet HARDORA tokens
+            </button>
           </div>
 
           <p className="text-gray-400 pb-6 text-center">
-            Testnet HARDORA tokens are sent from: {Faucet.address}
+            Testnet HARDORA tokens are sent from: {faucetAddress}
           </p>
         </form>
 
