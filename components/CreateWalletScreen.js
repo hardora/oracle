@@ -61,7 +61,6 @@ function CreateWalletScreen() {
           </Pressable>
 
           <Pressable
-            onPress={nextHandler}
             style={[
               ({ pressed }) => pressed && styles.pressed,
               styles.importButton,

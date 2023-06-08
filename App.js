@@ -12,7 +12,6 @@ import ThirdScreen from "./onBoardingScreen/UI/ThirdScreen";
 import CreateWalletScreen from "./components/CreateWalletScreen";
 import SetupWalletScreen from "./components/SetupWalletScreen";
 import VerifyScreen from "./components/VerifyScreen";
-import Create from "./components/ProceedToHome";
 import ProceedToHome from "./components/ProceedToHome";
 import ConnectTrustedDevices from "./components/ConnectTrustedDevice";
 import StakeToken from "./components/StakeToken";
@@ -96,14 +95,6 @@ const App = () => {
         <Stack.Screen
           name="Verify"
           component={VerifyScreen}
-          options={{
-            headerLeft: () => null,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Create"
-          component={Create}
           options={{
             headerLeft: () => null,
             headerShown: false,

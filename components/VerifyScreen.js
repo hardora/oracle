@@ -11,14 +11,23 @@ export default function VerifyScreen() {
   function nextHandler() {
     navigation.navigate("Proceed");
   }
+  function nextHandlerSeed() {
+    navigation.navigate("SetupWalletScreen");
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.logo}>
           <Image source={require("../assets/images/logo_s.png")} />
         </View>
-        <View>
-          <Text style={styles.textBig}>Verify Seed Phrase</Text>
+        <View style={styles.row}>
+          <Ionicons
+            onPress={nextHandlerSeed}
+            name="arrow-back-outline"
+            color="white"
+            size={30}
+          />
+          <Text style={styles.text}>Verify Seed Phrase</Text>
         </View>
 
         <View>
@@ -120,6 +129,13 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.7,
   },
+  row: {
+    flexDirection: "row",
+    marginHorizontal: 20,
+    justifyContent: "space-between",
+    marginBottom: 20,
+    marginTop: 10,
+  },
   description: {
     fontSize: 18,
     textAlign: "center",
@@ -170,7 +186,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    marginVertical: 10,
+    marginTop: 40,
     alignItems: "center",
     justifyContent: "center",
   },
