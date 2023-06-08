@@ -149,4 +149,4 @@ function faucetPage() {
   );
 }
 
-export default App;
+export default faucetPage;
