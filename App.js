@@ -19,6 +19,8 @@ import StakeToken from "./components/StakeToken";
 import AccountInformation from "./components/AccountInformation";
 import DeviceInfo from "./components/DeviceInfo";
 import Settings from "./components/Settings";
+import ValidateStake from "./components/ValidateStake";
+import Staked from "./components/Staked";
 // import onBoardingScreen from './onBoardingScreen';
 // import OnBoardingSwiper from './onBoardingScreen/OnBoardingSwiper';
 // import ScreenBoarding from './onBoardingScreen/ScreenBoarding';
@@ -150,6 +152,22 @@ const App = () => {
         <Stack.Screen
           name="Settings"
           component={Settings}
+          options={{
+            headerLeft: () => null,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="ValidateStake"
+          component={ValidateStake}
+          options={{
+            headerLeft: () => null,
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Staked"
+          component={Staked}
           options={{
             headerLeft: () => null,
             headerShown: false,

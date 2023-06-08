@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { Image, Pressable } from "react-native";
+import { Image, ImageBackground, Pressable } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
@@ -26,86 +26,91 @@ export default function VerifyScreen() {
             Please select the seed phrase in the correct order
           </Text>
         </View>
+        <ImageBackground
+          source={require("../assets/images/bg.png")}
+          resizeMode="cover"
+        >
+          <View style={styles.grid}>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>1</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>2</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>3</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>4</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>5</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>6</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>7</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>8</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>9</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>10</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>11</Text>
+              </View>
+            </Pressable>
+            <Pressable style={styles.flex}>
+              <View>
+                <Text style={styles.text}>12</Text>
+              </View>
+            </Pressable>
+          </View>
 
-        <View style={styles.grid}>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>1</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>2</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>3</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>4</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>5</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>6</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>7</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>8</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>9</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>10</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>11</Text>
-            </View>
-          </Pressable>
-          <Pressable style={styles.flex}>
-            <View>
-              <Text style={styles.text}>12</Text>
-            </View>
-          </Pressable>
-        </View>
-
-        <View style={styles.buttonHolder}>
-          <Pressable
-            onPress={nextHandler}
-            style={
-              ([({ pressed }) => pressed && styles.pressed], styles.nextButton)
-            }
-          >
-            <View
-              style={{
-                marginHorizontal: 10,
-              }}
+          <View style={styles.buttonHolder}>
+            <Pressable
+              onPress={nextHandler}
+              style={
+                ([({ pressed }) => pressed && styles.pressed],
+                styles.nextButton)
+              }
             >
-              <Text style={styles.next}>Verify Seed Phrase</Text>
-            </View>
-          </Pressable>
-        </View>
+              <View
+                style={{
+                  marginHorizontal: 10,
+                }}
+              >
+                <Text style={styles.next}>Verify Seed Phrase</Text>
+              </View>
+            </Pressable>
+          </View>
+        </ImageBackground>
       </View>
     </SafeAreaView>
   );
@@ -118,7 +123,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 18,
     textAlign: "center",
-    color: "white",
+    color: "#f5f5f5",
     paddingHorizontal: 20,
   },
   nextButton: {
@@ -137,19 +142,19 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     textAlign: "center",
-    color: "white",
+    color: "#f5f5f5",
   },
   textBig: {
-    color: "white",
+    color: "#f5f5f5",
     fontSize: 40,
     textAlign: "center",
     marginBottom: 20,
   },
   buttonHolder: {
     borderRadius: 40,
-    marginVertical: 30,
     paddingHorizontal: 60,
     justifyContent: "center",
+    marginTop: 350,
   },
   seeds: {
     marginHorizontal: 10,
@@ -157,7 +162,7 @@ const styles = StyleSheet.create({
     flexBasis: 3,
   },
   seed: {
-    color: "white",
+    color: "#f5f5f5",
     marginTop: 5,
     fontSize: 20,
     textAlign: "center",
