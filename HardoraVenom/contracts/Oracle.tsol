@@ -24,6 +24,7 @@ contract Oracle {
 
     event StateChange(uint _state);
     event ValidatorAdded(address indexed validator);
+    event RandomNumber(uint);
 
     constructor(uint _state) public {
         tvm.accept();
@@ -32,13 +33,16 @@ contract Oracle {
     }
 
     function generateRandomNumber() external returns (uint256 r) {
+        tvm.accept();
         uint randomNumber = tvm.hash("HASHcu567");
         r = (randomNumber / 10**60) ** count;
         count++;
+        emit RandomNumber(r);
         return r;
     }
 
     function addValidator(address _validator) public {
+        tvm.accept();
         require(!isValidator[_validator], 201);
         require(msg.sender == address(this), 202);
         isValidator[_validator] = true;
@@ -46,12 +50,13 @@ contract Oracle {
         emit ValidatorAdded(_validator);
     }
 
-    function validatorsList() public view returns (address[] _validators) {
+    function validatorsList() external view returns (address[] _validators) {
         _validators = validators;
         return _validators;
     }
 
     function addTrustedDeviceInfo(string _deviceType) public {
+        tvm.accept();
         trustedDeviceInfo[msg.sender].deviceType = _deviceType;
     }
 
@@ -63,7 +68,8 @@ contract Oracle {
 
     function getSessionData(
         uint256 _sessionId
-    ) public view returns (address, address, string memory, bytes32) {
+    ) public view returns (address, address, string, bytes32) {
+        tvm.accept();
         require(_sessionId < currentSessionId, 203);
         Session session = sessionData[_sessionId];
         return (
@@ -74,7 +80,7 @@ contract Oracle {
         );
     }
 
-    function getTrustedDeviceInfo() public view returns (string memory) {
+    function getTrustedDeviceInfo() external view returns (string) {
         return trustedDeviceInfo[msg.sender].deviceType;
     }
 

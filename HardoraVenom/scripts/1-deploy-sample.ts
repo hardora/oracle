@@ -12,13 +12,20 @@ async function main() {
     },
 
     constructorParams: {
-      _state: 1,
+      _state: 0,
     },
-    value: locklift.utils.toNano(5),
+    value: locklift.utils.toNano(1),
   });
   console.log("two");
 
   console.log(`Oracle deployed at: ${oracle.address}`);
+
+  const random = await oracle.methods.generateRandomNumber();
+  console.log("Random Number Generated: ", await String(await random));
+
+  // const validator = oracle.methods.addValidator(user);
+  const list = await oracle.methods.validatorsList();
+  console.log("Validators list: ", await list);
 }
 
 main()

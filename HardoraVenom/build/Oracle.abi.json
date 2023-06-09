@@ -1,6 +1,6 @@
 {
 	"ABI version": 2,
-	"version": "2.3",
+	"version": "2.2",
 	"header": ["pubkey", "time", "expire"],
 	"functions": [
 		{
@@ -59,7 +59,7 @@
 			"outputs": [
 				{"name":"value0","type":"address"},
 				{"name":"value1","type":"address"},
-				{"name":"memory","type":"string"},
+				{"name":"value2","type":"string"},
 				{"name":"value3","type":"uint256"}
 			]
 		},
@@ -68,7 +68,7 @@
 			"inputs": [
 			],
 			"outputs": [
-				{"name":"memory","type":"string"}
+				{"name":"value0","type":"string"}
 			]
 		},
 		{
@@ -135,6 +135,14 @@
 			"name": "ValidatorAdded",
 			"inputs": [
 				{"name":"validator","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "RandomNumber",
+			"inputs": [
+				{"name":"value0","type":"uint256"}
 			],
 			"outputs": [
 			]

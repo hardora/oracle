@@ -18,12 +18,15 @@ PUSHCONT {
 IF
 LDU 256
 ENDS
-.loc ../contracts/Oracle.tsol, 15
+.loc ../contracts/Oracle.tsol, 30
 ACCEPT
-.loc ../contracts/Oracle.tsol, 16
+.loc ../contracts/Oracle.tsol, 31
 CALLREF {
 	CALL $setState_a9e966b7_internal_macro$
 }
+.loc ../contracts/Oracle.tsol, 32
+PUSHINT 0
+SETGLOB 12
 .loc ../contracts/Oracle.tsol, 0
 CALLREF {
 	CALL $c7_to_c4$
@@ -39,7 +42,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/Oracle.tsol, 19
+.loc ../contracts/Oracle.tsol, 35
 ENDS
 .loc ../contracts/Oracle.tsol, 0
 CALLREF {
@@ -74,25 +77,36 @@ CALLREF {
 THROW 0
 
 .macro generateRandomNumber_773a1154_internal_macro
-.loc ../contracts/Oracle.tsol, 20
+.loc ../contracts/Oracle.tsol, 36
+ACCEPT
+.loc ../contracts/Oracle.tsol, 37
 PUSHREF {
 	.blob x484153486375353637
 }
 HASHCU
-.loc ../contracts/Oracle.tsol, 21
+.loc ../contracts/Oracle.tsol, 38
 PUSHINT 1000000000000000000000000000000000000000000000000000000000000
 DIV
-GETGLOB 13
+GETGLOB 11
 DUP2
 OR
 THROWIFNOT 69
 CALLREF {
 	CALL $__exp_macro$
 }
-.loc ../contracts/Oracle.tsol, 22
-GETGLOB 13
+.loc ../contracts/Oracle.tsol, 39
+GETGLOB 11
 INC
-SETGLOB 13
+SETGLOB 11
+.loc ../contracts/Oracle.tsol, 40
+DUP
+PUSHSLICE xc00000000000000000000000002feb89e0
+NEWC
+STSLICE
+STU 256
+ENDC
+PUSHINT 0
+SENDRAWMSG
 .loc ../contracts/Oracle.tsol, 0
 
 .macro addValidator
@@ -104,7 +118,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/Oracle.tsol, 26
+.loc ../contracts/Oracle.tsol, 44
 OVER
 PUSHCONT {
 	LDREF
@@ -129,9 +143,11 @@ THROW 0
 CALL $addValidator_4d238c8e_internal_macro$
 
 .macro addValidator_4d238c8e_internal_macro
-.loc ../contracts/Oracle.tsol, 27
+.loc ../contracts/Oracle.tsol, 45
+ACCEPT
+.loc ../contracts/Oracle.tsol, 46
 DUP
-GETGLOB 11
+GETGLOB 15
 PUSHINT 267
 DICTGET
 ZEROSWAPIFNOT
@@ -140,23 +156,23 @@ PUSHCONT {
 }
 IF
 THROWIF 201
-.loc ../contracts/Oracle.tsol, 28
+.loc ../contracts/Oracle.tsol, 47
 GETGLOB 9
 MYADDR
 SDEQ
 THROWIFNOT 202
-.loc ../contracts/Oracle.tsol, 29
+.loc ../contracts/Oracle.tsol, 48
 DUP
-GETGLOB 11
+GETGLOB 15
 NEWC
 STONE
 ROTREV
 PUSHINT 267
 DICTSETB
-SETGLOB 11
-.loc ../contracts/Oracle.tsol, 30
+SETGLOB 15
+.loc ../contracts/Oracle.tsol, 49
 DUP
-GETGLOB 12
+GETGLOB 16
 UNPAIR
 OVER
 INC
@@ -164,8 +180,8 @@ ROLLREV 3
 PUSHINT 32
 DICTUSET
 PAIR
-SETGLOB 12
-.loc ../contracts/Oracle.tsol, 31
+SETGLOB 16
+.loc ../contracts/Oracle.tsol, 50
 PUSHSLICE xc000000000000000000000000030b8f263
 NEWC
 STSLICE
@@ -184,7 +200,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/Oracle.tsol, 34
+.loc ../contracts/Oracle.tsol, 53
 ENDS
 .loc ../contracts/Oracle.tsol, 0
 CALLREF {
@@ -221,13 +237,68 @@ IFREF {
 }
 THROW 0
 
-.globl	validatorsList_bb8ac08f_internal
-.type	validatorsList_bb8ac08f_internal, @function
-CALL $validatorsList_bb8ac08f_internal_macro$
-
 .macro validatorsList_bb8ac08f_internal_macro
-.loc ../contracts/Oracle.tsol, 35
-GETGLOB 12
+.loc ../contracts/Oracle.tsol, 54
+GETGLOB 16
+.loc ../contracts/Oracle.tsol, 0
+
+.macro addTrustedDeviceInfo
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc ../contracts/Oracle.tsol, 58
+LDREF
+ENDS
+.loc ../contracts/Oracle.tsol, 0
+CALLREF {
+	CALL $addTrustedDeviceInfo_9af9e95f_internal_macro$
+}
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.globl	addTrustedDeviceInfo_9af9e95f_internal
+.type	addTrustedDeviceInfo_9af9e95f_internal, @function
+CALL $addTrustedDeviceInfo_9af9e95f_internal_macro$
+
+.macro addTrustedDeviceInfo_9af9e95f_internal_macro
+.loc ../contracts/Oracle.tsol, 59
+ACCEPT
+.loc ../contracts/Oracle.tsol, 60
+GETGLOB 9
+GETGLOB 13
+DUP2
+PUSHINT 267
+DICTGET
+IFREFELSEREF
+{
+	LDREF
+	ENDS
+	SINGLE
+}
+{
+	PUSHREF {
+	}
+	SINGLE
+}
+ROLL 3
+SETINDEX 0
+CALLREF {
+	UNSINGLE
+	NEWC
+	STREF
+}
+ROTREV
+PUSHINT 267
+DICTSETB
+SETGLOB 13
 .loc ../contracts/Oracle.tsol, 0
 
 .macro setState
@@ -239,7 +310,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/Oracle.tsol, 39
+.loc ../contracts/Oracle.tsol, 63
 OVER
 PUSHCONT {
 	LDREF
@@ -264,12 +335,12 @@ THROW 0
 CALL $setState_a9e966b7_internal_macro$
 
 .macro setState_a9e966b7_internal_macro
-.loc ../contracts/Oracle.tsol, 40
+.loc ../contracts/Oracle.tsol, 64
 ACCEPT
-.loc ../contracts/Oracle.tsol, 41
+.loc ../contracts/Oracle.tsol, 65
 DUP
 SETGLOB 10
-.loc ../contracts/Oracle.tsol, 42
+.loc ../contracts/Oracle.tsol, 66
 PUSHSLICE xc0000000000000000000000000633b31a8
 NEWC
 STSLICE
@@ -277,6 +348,180 @@ STU 256
 ENDC
 PUSHINT 0
 SENDRAWMSG
+.loc ../contracts/Oracle.tsol, 0
+
+.macro getSessionData
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc ../contracts/Oracle.tsol, 69
+OVER
+PUSHCONT {
+	LDREF
+	ENDS
+	CTOS
+}
+IF
+LDU 256
+ENDS
+.loc ../contracts/Oracle.tsol, 0
+CALLREF {
+	CALL $getSessionData_346582c6_internal_macro$
+}
+PUSH S4
+PUSHCONT {
+	PUSH S6
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 1
+	STUR 98
+	REVERSE 5, 0
+	NEWC
+	STSLICECONST x8c28d81a
+	STSLICE
+	ROLLREV 3
+	NEWC
+	STSLICE
+	STREF
+	STU 256
+	STBREFR
+	STBREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+PUSHCONT {
+	BLKDROP 4
+}
+IFELSE
+IFREF {
+	CALL $upd_only_time_in_c4$
+}
+THROW 0
+
+.globl	getSessionData_346582c6_internal
+.type	getSessionData_346582c6_internal, @function
+CALL $getSessionData_346582c6_internal_macro$
+
+.macro getSessionData_346582c6_internal_macro
+.loc ../contracts/Oracle.tsol, 72
+ACCEPT
+.loc ../contracts/Oracle.tsol, 73
+DUP
+GETGLOB 12
+LESS
+THROWIFNOT 203
+.loc ../contracts/Oracle.tsol, 74
+GETGLOB 14
+PUSHPOW2 8
+DICTUGETREF
+PUSHCONT {
+	CTOS
+	CALLREF {
+		LDMSGADDR
+		LDREF
+		ENDS
+		CTOS
+		LDMSGADDR
+		LDREF
+		LDU 256
+		ENDS
+		TUPLE 4
+	}
+}
+PUSHCONT {
+	PUSHREFSLICE {
+		.blob x8000000000000000000000000000000000000000000000000000000000000000001_
+	}
+	DUP
+	PUSHREF {
+	}
+	PUSHINT 0
+	TUPLE 4
+}
+IFELSE
+.loc ../contracts/Oracle.tsol, 75
+DUP
+FIRST
+OVER
+SECOND
+PUSH S2
+THIRD
+ROLL 3
+INDEX 3
+.loc ../contracts/Oracle.tsol, 0
+
+.macro getTrustedDeviceInfo
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc ../contracts/Oracle.tsol, 83
+ENDS
+.loc ../contracts/Oracle.tsol, 0
+CALLREF {
+	CALL $getTrustedDeviceInfo_1ec7c72b_internal_macro$
+}
+OVER
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 4033883476
+	STUR 130
+	STREF
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+PUSHCONT {
+	DROP
+}
+IFELSE
+IFREF {
+	CALL $upd_only_time_in_c4$
+}
+THROW 0
+
+.macro getTrustedDeviceInfo_1ec7c72b_internal_macro
+.loc ../contracts/Oracle.tsol, 84
+GETGLOB 9
+GETGLOB 13
+PUSHINT 267
+DICTGET
+IFREFELSEREF
+{
+	LDREF
+	ENDS
+	SINGLE
+}
+{
+	PUSHREF {
+	}
+	SINGLE
+}
+FIRST
 .loc ../contracts/Oracle.tsol, 0
 
 .macro getDetails
@@ -288,7 +533,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/Oracle.tsol, 45
+.loc ../contracts/Oracle.tsol, 87
 ENDS
 .loc ../contracts/Oracle.tsol, 0
 CALLREF {
@@ -322,7 +567,7 @@ IFREF {
 THROW 0
 
 .macro getDetails_fbbf93a0_internal_macro
-.loc ../contracts/Oracle.tsol, 46
+.loc ../contracts/Oracle.tsol, 88
 GETGLOB 10
 .loc ../contracts/Oracle.tsol, 0
 
@@ -334,14 +579,23 @@ LDU 64 ; pubkey timestamp c4
 LDU 1 ; ctor flag
 NIP
 LDU 256
+LDU 256
+LDREF
+ENDS
+CTOS
+LDU 256
+LDDICT
+LDDICT
 LDDICT
 LDU 32
 LDDICT
 ROTREV
 PAIR
 SWAP
-LDU 256
 ENDS
+SETGLOB 16
+SETGLOB 15
+SETGLOB 14
 SETGLOB 13
 SETGLOB 12
 SETGLOB 11
@@ -360,11 +614,15 @@ PUSHCONT {
 	CTOS
 	PLDDICT ; D
 	PUSHINT 0
+	BLKPUSH 2, 0
 	NEWDICT
+	BLKPUSH 2, 0
 	PUSHINT 0
 	NEWDICT
 	PAIR
-	PUSHINT 0
+	SETGLOB 16
+	SETGLOB 15
+	SETGLOB 14
 	SETGLOB 13
 	SETGLOB 12
 	SETGLOB 11
@@ -377,13 +635,16 @@ PUSHCONT {
 	PUSHINT 0 ; timestamp
 	SETGLOB 3
 	PUSHINT 1
-	SETGLOB 13
+	SETGLOB 11
 }
 IFREFELSE {
 	CALL $c4_to_c7$
 }
 
 .macro c7_to_c4
+GETGLOB 16
+GETGLOB 15
+GETGLOB 14
 GETGLOB 13
 GETGLOB 12
 GETGLOB 11
@@ -395,13 +656,19 @@ STU 256
 STU 64
 STONE
 STU 256
+STU 256
+ROLLREV 5
+NEWC
+STU 256
+STDICT
+STDICT
 STDICT
 SWAP
 UNPAIR
 XCHG S2
 STU 32
 STDICT
-STU 256
+STBREFR
 ENDC
 POPROOT
 
@@ -462,7 +729,9 @@ CTOS
 SBITS
 NEQINT 1
 SETGLOB 6
-PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+PUSHREFSLICE {
+	.blob x8000000000000000000000000000000000000000000000000000000000000000001_
+}
 SETGLOB 9
 OVER
 CALLREF {
@@ -512,13 +781,73 @@ CALLREF {
 }
 THROW 60
 
+.macro currentSessionId
+DROP
+ENDS
+CALLREF {
+	CALL $c4_to_c7$
+}
+GETGLOB 12
+OVER
+PUSHCONT {
+	PUSHSLICE xc0000000000000000000000000b0258947
+	NEWC
+	STSLICE
+	STU 256
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+THROW 0
+
+.macro trustedDeviceInfo
+DROP
+ENDS
+CALLREF {
+	CALL $c4_to_c7$
+}
+GETGLOB 13
+OVER
+PUSHCONT {
+	PUSHSLICE xc0000000000000000000000000982fe434
+	NEWC
+	STSLICE
+	STDICT
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+THROW 0
+
+.macro sessionData
+DROP
+ENDS
+CALLREF {
+	CALL $c4_to_c7$
+}
+GETGLOB 14
+OVER
+PUSHCONT {
+	PUSHSLICE xc0000000000000000000000000ff0d3403
+	NEWC
+	STSLICE
+	STDICT
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+THROW 0
+
 .macro isValidator
 DROP
 ENDS
 CALLREF {
 	CALL $c4_to_c7$
 }
-GETGLOB 11
+GETGLOB 15
 OVER
 PUSHCONT {
 	PUSHSLICE xc0000000000000000000000000b22950c7
@@ -538,7 +867,7 @@ ENDS
 CALLREF {
 	CALL $c4_to_c7$
 }
-GETGLOB 12
+GETGLOB 16
 OVER
 PUSHCONT {
 	PUSHSLICE xc0000000000000000000000000d15c11e3
@@ -558,7 +887,7 @@ THROW 0
 
 .macro public_function_selector
 DUP
-PUSHINT 781733344
+PUSHINT 405791796
 LEQ
 IFJMPREF {
 	DUP
@@ -568,11 +897,28 @@ IFJMPREF {
 		CALL $generateRandomNumber$
 	}
 	DUP
+	PUSHINT 204003354
+	EQUAL
+	IFJMPREF {
+		CALL $getSessionData$
+	}
+	DUP
 	PUSHINT 339042472
 	EQUAL
 	IFJMPREF {
 		CALL $addValidator$
 	}
+	DUP
+	PUSHINT 405791796
+	EQUAL
+	IFJMPREF {
+		CALL $trustedDeviceInfo$
+	}
+}
+DUP
+PUSHINT 841568455
+LEQ
+IFJMPREF {
 	DUP
 	PUSHINT 543341594
 	EQUAL
@@ -585,17 +931,23 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $setState$
 	}
-}
-DUP
-PUSHINT 1364988387
-LEQ
-IFJMPREF {
+	DUP
+	PUSHINT 807766343
+	EQUAL
+	IFJMPREF {
+		CALL $currentSessionId$
+	}
 	DUP
 	PUSHINT 841568455
 	EQUAL
 	IFJMPREF {
 		CALL $isValidator$
 	}
+}
+DUP
+PUSHINT 1364988387
+LEQ
+IFJMPREF {
 	DUP
 	PUSHINT 881526575
 	EQUAL
@@ -609,10 +961,33 @@ IFJMPREF {
 		CALL $constructor$
 	}
 	DUP
+	PUSHINT 1144610283
+	EQUAL
+	IFJMPREF {
+		CALL $addTrustedDeviceInfo$
+	}
+	DUP
 	PUSHINT 1364988387
 	EQUAL
 	IFJMPREF {
 		CALL $validators$
+	}
+}
+DUP
+PUSHINT 2131571715
+LEQ
+IFJMPREF {
+	DUP
+	PUSHINT 1886399828
+	EQUAL
+	IFJMPREF {
+		CALL $getTrustedDeviceInfo$
+	}
+	DUP
+	PUSHINT 2131571715
+	EQUAL
+	IFJMPREF {
+		CALL $sessionData$
 	}
 }
 
