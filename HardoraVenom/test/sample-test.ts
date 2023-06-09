@@ -4,6 +4,7 @@ import { FactorySource } from "../build/factorySource";
 
 let oracle: Contract<FactorySource["Oracle"]>;
 let signer: Signer;
+let user: Address;
 
 describe("Test Oracle contract", async function () {
   before(async () => {
@@ -29,7 +30,7 @@ describe("Test Oracle contract", async function () {
         constructorParams: {
           _state: INIT_STATE,
         },
-        value: locklift.utils.toNano(2),
+        value: locklift.utils.toNano(1),
       });
       oracle = contract;
 
@@ -45,9 +46,12 @@ describe("Test Oracle contract", async function () {
       const response = await oracle.methods.getDetails({}).call();
 
       const random = await oracle.methods.generateRandomNumber();
-      console.log("Random Number Generated: ", random);
+      console.log("Random Number Generated: ", await String(await random));
 
       // const validator = oracle.methods.addValidator(user);
+      const list = await oracle.methods.validatorsList();
+      console.log("Validators list: ", list);
+
       expect(Number(response._state)).to.be.equal(NEW_STATE, "Wrong state");
     });
   });

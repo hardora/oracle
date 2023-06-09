@@ -1,5 +1,5 @@
-const Faucet = {
-  address: "0:7a04abb7e385f3aaf8c0ca6579949fd7b46ffbd709b533b5cffe7ebe41764db0",
+export const Faucet = {
+  address: "0:b7659a80cfcf4cfdb016bfb76134a0276576e5ab6737544b26fdecd62810c1da",
   abi: {
     "ABI version": 2,
     data: [

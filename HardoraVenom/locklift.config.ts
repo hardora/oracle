@@ -25,9 +25,9 @@ const config: LockliftConfig = {
     version: "0.62.0",
 
     // Specify config for extarnal contracts as in exapmple
-    // externalContracts: {
-    //   "node_modules/tip3/build": ["TokenRoot", "TokenWallet"],
-    // },
+    externalContracts: {
+      "node_modules/tip3/build": ["TokenRoot", "TokenWallet"],
+    },
   },
   linker: {
     // Specify path to your stdlib
