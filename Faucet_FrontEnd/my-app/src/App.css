@@ -1,0 +1,13 @@
+.card {
+  backdrop-filter: blur(4rem);
+  background-color: rgba(156, 154, 154, 0.1);
+  box-shadow: 0 0.5em a(0, 0, 0, 0.3);
+  border-top: 3px solid #ffd900;
+}
+
+
+
+body {
+  background-color: #111432;
+}
+
