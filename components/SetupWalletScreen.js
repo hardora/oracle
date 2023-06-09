@@ -1,19 +1,30 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { ImageBackground } from "react-native";
+import { useContext, useEffect, useState } from "react";
+import { ImageBackground, ScrollView } from "react-native";
 import { Image, Pressable } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
+import { Wordlist } from "../constant/Wordlist";
+import { MyContext } from "../MyContext";
 
 export default function SetupWalletScreen() {
   const navigation = useNavigation();
   function nextHandler() {
     navigation.navigate("Verify");
   }
+
+  const [wordlist, setWordlist] = useState();
+
+  const words = Wordlist.slice(0, 12).map(function () {
+    return this.splice(Math.floor(Math.random() * this.length), 1)[0];
+  }, Wordlist.slice());
+
+  console.log(words);
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.logo}>
           <Image source={require("../assets/images/logo_s.png")} />
@@ -27,18 +38,13 @@ export default function SetupWalletScreen() {
           resizeMode="cover"
         >
           <View style={styles.seeds}>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
-            <Text style={styles.seed}>1. Seed</Text>
+            {words.map((word, index) => {
+              return (
+                <Text style={styles.seed} key={index}>
+                  {index + 1}. {word}
+                </Text>
+              );
+            })}
           </View>
 
           <View style={styles.buttonHolder}>
@@ -67,7 +73,7 @@ export default function SetupWalletScreen() {
           </View>
         </ImageBackground>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -117,6 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     fontWeight: 900,
+    marginHorizontal: 10,
   },
 
   logo: {

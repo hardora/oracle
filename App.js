@@ -1,6 +1,3 @@
-// import './global';
-// const Web3 = require('web3');
-
 import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -20,22 +17,10 @@ import DeviceInfo from "./components/DeviceInfo";
 import Settings from "./components/Settings";
 import ValidateStake from "./components/ValidateStake";
 import Staked from "./components/Staked";
-// import onBoardingScreen from './onBoardingScreen';
-// import OnBoardingSwiper from './onBoardingScreen/OnBoardingSwiper';
-// import ScreenBoarding from './onBoardingScreen/ScreenBoarding';
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  // function componentWillMount() {
-  // const web3 = new Web3(
-  //     new Web3.providers.HttpProvider('https://mainnet.infura.io/')
-  // );
-
-  // web3.eth.getBlock('latest').then(console.log)
-  // }
-  // componentWillMount();
-
   return (
     <NavigationContainer>
       <Stack.Navigator>

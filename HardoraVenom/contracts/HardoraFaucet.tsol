@@ -37,22 +37,6 @@ contract HardoraFaucet is IAcceptTokensMintCallback {
         distributedTokenWallet = _wallet;
     }
 
-    // function onAcceptTokensTransfer(
-    //     address root,
-    //     uint128 amount,
-    //     address sender,
-    //     address senderWallet,
-    //     address remainingGasTo,
-    //     TvmCell payload
-    // ) external override {
-    //     require (senderWallet == distributedTokenWallet, 202);
-    //     remainingGasTo.transfer({value: 0, flag: 64, bounce: false});
-
-    //     root;
-    //     remainingGasTo;
-    //     payload;
-    // }
-
     function onAcceptTokensMint(
         address tokenRoot,
         uint128 amount,

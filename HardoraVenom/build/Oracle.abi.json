@@ -1,0 +1,155 @@
+{
+	"ABI version": 2,
+	"version": "2.3",
+	"header": ["pubkey", "time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+				{"name":"_state","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "generateRandomNumber",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"r","type":"uint256"}
+			]
+		},
+		{
+			"name": "addValidator",
+			"inputs": [
+				{"name":"_validator","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "validatorsList",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"_validators","type":"address[]"}
+			]
+		},
+		{
+			"name": "addTrustedDeviceInfo",
+			"inputs": [
+				{"name":"_deviceType","type":"string"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setState",
+			"inputs": [
+				{"name":"_state","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getSessionData",
+			"inputs": [
+				{"name":"_sessionId","type":"uint256"}
+			],
+			"outputs": [
+				{"name":"value0","type":"address"},
+				{"name":"value1","type":"address"},
+				{"name":"memory","type":"string"},
+				{"name":"value3","type":"uint256"}
+			]
+		},
+		{
+			"name": "getTrustedDeviceInfo",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"memory","type":"string"}
+			]
+		},
+		{
+			"name": "getDetails",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"_state","type":"uint256"}
+			]
+		},
+		{
+			"name": "currentSessionId",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"currentSessionId","type":"uint256"}
+			]
+		},
+		{
+			"name": "trustedDeviceInfo",
+			"inputs": [
+			],
+			"outputs": [
+				{"components":[{"name":"deviceType","type":"string"}],"name":"trustedDeviceInfo","type":"map(address,tuple)"}
+			]
+		},
+		{
+			"name": "sessionData",
+			"inputs": [
+			],
+			"outputs": [
+				{"components":[{"name":"userAddress","type":"address"},{"name":"deviceAddress","type":"address"},{"name":"data","type":"string"},{"name":"requestId","type":"uint256"}],"name":"sessionData","type":"map(uint256,tuple)"}
+			]
+		},
+		{
+			"name": "isValidator",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"isValidator","type":"map(address,bool)"}
+			]
+		},
+		{
+			"name": "validators",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"validators","type":"address[]"}
+			]
+		}
+	],
+	"data": [
+	],
+	"events": [
+		{
+			"name": "StateChange",
+			"inputs": [
+				{"name":"_state","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "ValidatorAdded",
+			"inputs": [
+				{"name":"validator","type":"address"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"state","type":"uint256"},
+		{"name":"count","type":"uint256"},
+		{"name":"currentSessionId","type":"uint256"},
+		{"components":[{"name":"deviceType","type":"string"}],"name":"trustedDeviceInfo","type":"map(address,tuple)"},
+		{"components":[{"name":"userAddress","type":"address"},{"name":"deviceAddress","type":"address"},{"name":"data","type":"string"},{"name":"requestId","type":"uint256"}],"name":"sessionData","type":"map(uint256,tuple)"},
+		{"name":"isValidator","type":"map(address,bool)"},
+		{"name":"validators","type":"address[]"}
+	]
+}

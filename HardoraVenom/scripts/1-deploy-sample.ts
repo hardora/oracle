@@ -4,22 +4,21 @@ async function main() {
   const signer = (await locklift.keystore.getSigner("0"))!;
   console.log("one");
 
-  const { contract: faucet, tx } = await locklift.factory.deployContract({
-    contract: "HardoraFaucet",
+  const { contract: oracle, tx } = await locklift.factory.deployContract({
+    contract: "Oracle",
     publicKey: signer.publicKey,
     initParams: {
       owner: `0x${signer.publicKey}`,
     },
 
     constructorParams: {
-      _state: 0,
-      _distributedTokenRoot: new Address("0:7a04abb7e385f3aaf8c0ca6579949fd7b46ffbd709b533b5cffe7ebe41764db0"),
+      _state: 1,
     },
     value: locklift.utils.toNano(5),
   });
   console.log("two");
 
-  console.log(`Faucet deployed at: ${faucet.address}`);
+  console.log(`Oracle deployed at: ${oracle.address}`);
 }
 
 main()

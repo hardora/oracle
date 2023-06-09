@@ -17,42 +17,20 @@ PUSHCONT {
 }
 IF
 LDU 256
-LDMSGADDR
 ENDS
-.loc ../contracts/HardoraFaucet.tsol, 21
+.loc ../contracts/Oracle.tsol, 15
 ACCEPT
-.loc ../contracts/HardoraFaucet.tsol, 22
-SETGLOB 12
-.loc ../contracts/HardoraFaucet.tsol, 24
-PUSHINT 100000000
-MYADDR
-GETGLOB 12
-NEWC
-STSLICECONST x62_
-STSLICE
-PUSHINT 2820045005182170565370280386138670788247553
-STUR 143
-ROTREV
-PUSHSLICE x31edd4c758805a93
-NEWC
-STSLICE
-STSLICE
-STU 128
-STBREFR
-ENDC
-PUSHINT 1
-SENDRAWMSG
-.loc ../contracts/HardoraFaucet.tsol, 32
+.loc ../contracts/Oracle.tsol, 16
 CALLREF {
 	CALL $setState_a9e966b7_internal_macro$
 }
-.loc ../contracts/HardoraFaucet.tsol, 0
+.loc ../contracts/Oracle.tsol, 0
 CALLREF {
 	CALL $c7_to_c4$
 }
 THROW 0
 
-.macro HardoraWallet
+.macro generateRandomNumber
 DROP
 GETGLOB 6
 THROWIFNOT 76
@@ -61,37 +39,63 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/HardoraFaucet.tsol, 35
+.loc ../contracts/Oracle.tsol, 19
+ENDS
+.loc ../contracts/Oracle.tsol, 0
+CALLREF {
+	CALL $generateRandomNumber_773a1154_internal_macro$
+}
 OVER
 PUSHCONT {
-	LDREF
-	ENDS
+	PUSH S3
 	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 2314487229
+	STUR 130
+	STU 256
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
 }
-IF
-LDMSGADDR
-ENDS
-.loc ../contracts/HardoraFaucet.tsol, 0
-CALLREF {
-	CALL $HardoraWallet_27b7dcbf_internal_macro$
+PUSHCONT {
+	DROP
 }
+IFELSE
 DROP
 CALLREF {
 	CALL $c7_to_c4$
 }
 THROW 0
 
-.macro HardoraWallet_27b7dcbf_internal_macro
-.loc ../contracts/HardoraFaucet.tsol, 36
-GETGLOB 9
-GETGLOB 12
-SDEQ
-THROWIFNOT 201
-.loc ../contracts/HardoraFaucet.tsol, 37
+.macro generateRandomNumber_773a1154_internal_macro
+.loc ../contracts/Oracle.tsol, 20
+PUSHREF {
+	.blob x484153486375353637
+}
+HASHCU
+.loc ../contracts/Oracle.tsol, 21
+PUSHINT 1000000000000000000000000000000000000000000000000000000000000
+DIV
+GETGLOB 13
+DUP2
+OR
+THROWIFNOT 69
+CALLREF {
+	CALL $__exp_macro$
+}
+.loc ../contracts/Oracle.tsol, 22
+GETGLOB 13
+INC
 SETGLOB 13
-.loc ../contracts/HardoraFaucet.tsol, 0
+.loc ../contracts/Oracle.tsol, 0
 
-.macro onAcceptTokensMint
+.macro addValidator
 DROP
 GETGLOB 6
 THROWIFNOT 76
@@ -100,7 +104,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/HardoraFaucet.tsol, 40
+.loc ../contracts/Oracle.tsol, 26
 OVER
 PUSHCONT {
 	LDREF
@@ -109,16 +113,10 @@ PUSHCONT {
 }
 IF
 LDMSGADDR
-LDU 128
-LDREF
 ENDS
-CTOS
-LDMSGADDR
-LDREF
-ENDS
-.loc ../contracts/HardoraFaucet.tsol, 0
+.loc ../contracts/Oracle.tsol, 0
 CALLREF {
-	CALL $onAcceptTokensMint_2bd1475b_internal_macro$
+	CALL $addValidator_4d238c8e_internal_macro$
 }
 DROP
 CALLREF {
@@ -126,30 +124,111 @@ CALLREF {
 }
 THROW 0
 
-.macro onAcceptTokensMint_2bd1475b_internal_macro
-.loc ../contracts/HardoraFaucet.tsol, 46
-DROP
-ROT
-GETGLOB 12
-SDEQ
-THROWIFNOT 203
-.loc ../contracts/HardoraFaucet.tsol, 47
+.globl	addValidator_4d238c8e_internal
+.type	addValidator_4d238c8e_internal, @function
+CALL $addValidator_4d238c8e_internal_macro$
+
+.macro addValidator_4d238c8e_internal_macro
+.loc ../contracts/Oracle.tsol, 27
+DUP
+GETGLOB 11
+PUSHINT 267
+DICTGET
+ZEROSWAPIFNOT
+PUSHCONT {
+	PLDI 1
+}
+IF
+THROWIF 201
+.loc ../contracts/Oracle.tsol, 28
 GETGLOB 9
-GETGLOB 12
+MYADDR
 SDEQ
-THROWIFNOT 204
-.loc ../contracts/HardoraFaucet.tsol, 48
+THROWIFNOT 202
+.loc ../contracts/Oracle.tsol, 29
+DUP
+GETGLOB 11
 NEWC
-STSLICECONST x42_
+STONE
+ROTREV
+PUSHINT 267
+DICTSETB
+SETGLOB 11
+.loc ../contracts/Oracle.tsol, 30
+DUP
+GETGLOB 12
+UNPAIR
+OVER
+INC
+ROLLREV 3
+PUSHINT 32
+DICTUSET
+PAIR
+SETGLOB 12
+.loc ../contracts/Oracle.tsol, 31
+PUSHSLICE xc000000000000000000000000030b8f263
+NEWC
 STSLICE
-PUSHINT 111
-STZEROES
+STSLICE
 ENDC
-PUSHINT 64
+PUSHINT 0
 SENDRAWMSG
-.loc ../contracts/HardoraFaucet.tsol, 50
+.loc ../contracts/Oracle.tsol, 0
+
+.macro validatorsList
 DROP
-.loc ../contracts/HardoraFaucet.tsol, 0
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc ../contracts/Oracle.tsol, 34
+ENDS
+.loc ../contracts/Oracle.tsol, 0
+CALLREF {
+	CALL $validatorsList_bb8ac08f_internal_macro$
+}
+OVER
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 3029010223
+	STUR 130
+	SWAP
+	UNPAIR
+	XCHG S2
+	STU 32
+	STDICT
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+PUSHCONT {
+	DROP
+}
+IFELSE
+IFREF {
+	CALL $upd_only_time_in_c4$
+}
+THROW 0
+
+.globl	validatorsList_bb8ac08f_internal
+.type	validatorsList_bb8ac08f_internal, @function
+CALL $validatorsList_bb8ac08f_internal_macro$
+
+.macro validatorsList_bb8ac08f_internal_macro
+.loc ../contracts/Oracle.tsol, 35
+GETGLOB 12
+.loc ../contracts/Oracle.tsol, 0
 
 .macro setState
 DROP
@@ -160,7 +239,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/HardoraFaucet.tsol, 55
+.loc ../contracts/Oracle.tsol, 39
 OVER
 PUSHCONT {
 	LDREF
@@ -170,7 +249,7 @@ PUSHCONT {
 IF
 LDU 256
 ENDS
-.loc ../contracts/HardoraFaucet.tsol, 0
+.loc ../contracts/Oracle.tsol, 0
 CALLREF {
 	CALL $setState_a9e966b7_internal_macro$
 }
@@ -185,12 +264,12 @@ THROW 0
 CALL $setState_a9e966b7_internal_macro$
 
 .macro setState_a9e966b7_internal_macro
-.loc ../contracts/HardoraFaucet.tsol, 56
+.loc ../contracts/Oracle.tsol, 40
 ACCEPT
-.loc ../contracts/HardoraFaucet.tsol, 57
+.loc ../contracts/Oracle.tsol, 41
 DUP
-SETGLOB 11
-.loc ../contracts/HardoraFaucet.tsol, 59
+SETGLOB 10
+.loc ../contracts/Oracle.tsol, 42
 PUSHSLICE xc0000000000000000000000000633b31a8
 NEWC
 STSLICE
@@ -198,7 +277,7 @@ STU 256
 ENDC
 PUSHINT 0
 SENDRAWMSG
-.loc ../contracts/HardoraFaucet.tsol, 0
+.loc ../contracts/Oracle.tsol, 0
 
 .macro getDetails
 DROP
@@ -209,9 +288,9 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/HardoraFaucet.tsol, 62
+.loc ../contracts/Oracle.tsol, 45
 ENDS
-.loc ../contracts/HardoraFaucet.tsol, 0
+.loc ../contracts/Oracle.tsol, 0
 CALLREF {
 	CALL $getDetails_fbbf93a0_internal_macro$
 }
@@ -243,9 +322,9 @@ IFREF {
 THROW 0
 
 .macro getDetails_fbbf93a0_internal_macro
-.loc ../contracts/HardoraFaucet.tsol, 68
-GETGLOB 11
-.loc ../contracts/HardoraFaucet.tsol, 0
+.loc ../contracts/Oracle.tsol, 46
+GETGLOB 10
+.loc ../contracts/Oracle.tsol, 0
 
 .macro c4_to_c7
 PUSHROOT
@@ -254,16 +333,14 @@ LDU 256 ; pubkey c4
 LDU 64 ; pubkey timestamp c4
 LDU 1 ; ctor flag
 NIP
-LDMSGADDR
-LDREF
-ENDS
-CTOS
 LDU 256
-LDMSGADDR
-LDREF
-ENDS
-CTOS
-LDMSGADDR
+LDDICT
+LDU 32
+LDDICT
+ROTREV
+PAIR
+SWAP
+LDU 256
 ENDS
 SETGLOB 13
 SETGLOB 12
@@ -282,21 +359,12 @@ PUSHCONT {
 	PUSHROOT
 	CTOS
 	PLDDICT ; D
-	PUSHINT 1
-	OVER
-	PUSHINT 64
-	DICTUGET
-	PUSHCONT {
-		PUSHREFSLICE {
-			.blob x8000000000000000000000000000000000000000000000000000000000000000001_
-		}
-	}
-	IFNOT
 	PUSHINT 0
-	PUSHREFSLICE {
-		.blob x8000000000000000000000000000000000000000000000000000000000000000001_
-	}
-	DUP
+	NEWDICT
+	PUSHINT 0
+	NEWDICT
+	PAIR
+	PUSHINT 0
 	SETGLOB 13
 	SETGLOB 12
 	SETGLOB 11
@@ -308,6 +376,8 @@ PUSHCONT {
 	SETGLOB 2
 	PUSHINT 0 ; timestamp
 	SETGLOB 3
+	PUSHINT 1
+	SETGLOB 13
 }
 IFREFELSE {
 	CALL $c4_to_c7$
@@ -324,16 +394,14 @@ NEWC
 STU 256
 STU 64
 STONE
-STSLICE
-ROLLREV 3
-NEWC
 STU 256
-STSLICE
+STDICT
 SWAP
-NEWC
-STSLICE
-STBREFR
-STBREFR
+UNPAIR
+XCHG S2
+STU 32
+STDICT
+STU 256
 ENDC
 POPROOT
 
@@ -394,9 +462,7 @@ CTOS
 SBITS
 NEQINT 1
 SETGLOB 6
-PUSHREFSLICE {
-	.blob x8000000000000000000000000000000000000000000000000000000000000000001_
-}
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
 SETGLOB 9
 OVER
 CALLREF {
@@ -446,7 +512,27 @@ CALLREF {
 }
 THROW 60
 
-.macro distributedTokenRoot
+.macro isValidator
+DROP
+ENDS
+CALLREF {
+	CALL $c4_to_c7$
+}
+GETGLOB 11
+OVER
+PUSHCONT {
+	PUSHSLICE xc0000000000000000000000000b22950c7
+	NEWC
+	STSLICE
+	STDICT
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+THROW 0
+
+.macro validators
 DROP
 ENDS
 CALLREF {
@@ -455,30 +541,14 @@ CALLREF {
 GETGLOB 12
 OVER
 PUSHCONT {
-	PUSHSLICE xc000000000000000000000000085e2064e
+	PUSHSLICE xc0000000000000000000000000d15c11e3
 	NEWC
 	STSLICE
-	STSLICE
-	ENDC
-	PUSHINT 0
-	SENDRAWMSG
-}
-IF
-THROW 0
-
-.macro distributedTokenWallet
-DROP
-ENDS
-CALLREF {
-	CALL $c4_to_c7$
-}
-GETGLOB 13
-OVER
-PUSHCONT {
-	PUSHSLICE xc0000000000000000000000000feb1816f
-	NEWC
-	STSLICE
-	STSLICE
+	SWAP
+	UNPAIR
+	XCHG S2
+	STU 32
+	STDICT
 	ENDC
 	PUSHINT 0
 	SENDRAWMSG
@@ -492,16 +562,16 @@ PUSHINT 781733344
 LEQ
 IFJMPREF {
 	DUP
-	PUSHINT 30752029
+	PUSHINT 167003581
 	EQUAL
 	IFJMPREF {
-		CALL $constructor$
+		CALL $generateRandomNumber$
 	}
 	DUP
-	PUSHINT 98698830
+	PUSHINT 339042472
 	EQUAL
 	IFJMPREF {
-		CALL $distributedTokenRoot$
+		CALL $addValidator$
 	}
 	DUP
 	PUSHINT 543341594
@@ -517,26 +587,32 @@ IFJMPREF {
 	}
 }
 DUP
-PUSHINT 2125562223
+PUSHINT 1364988387
 LEQ
 IFJMPREF {
 	DUP
-	PUSHINT 1484806803
+	PUSHINT 841568455
 	EQUAL
 	IFJMPREF {
-		CALL $HardoraWallet$
+		CALL $isValidator$
 	}
 	DUP
-	PUSHINT 2057231915
+	PUSHINT 881526575
 	EQUAL
 	IFJMPREF {
-		CALL $onAcceptTokensMint$
+		CALL $validatorsList$
 	}
 	DUP
-	PUSHINT 2125562223
+	PUSHINT 1016193477
 	EQUAL
 	IFJMPREF {
-		CALL $distributedTokenWallet$
+		CALL $constructor$
+	}
+	DUP
+	PUSHINT 1364988387
+	EQUAL
+	IFJMPREF {
+		CALL $validators$
 	}
 }
 
