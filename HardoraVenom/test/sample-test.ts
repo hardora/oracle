@@ -1,17 +1,17 @@
 import { expect } from "chai";
-import { Contract, Signer } from "locklift";
+import { Address, Contract, Signer } from "locklift";
 import { FactorySource } from "../build/factorySource";
 
-let sample: Contract<FactorySource["Sample"]>;
+let oracle: Contract<FactorySource["Oracle"]>;
 let signer: Signer;
 
-describe("Test Sample contract", async function () {
+describe("Test Oracle contract", async function () {
   before(async () => {
     signer = (await locklift.keystore.getSigner("0"))!;
   });
   describe("Contracts", async function () {
     it("Load contract factory", async function () {
-      const sampleData = await locklift.factory.getContractArtifacts("Sample");
+      const sampleData = await locklift.factory.getContractArtifacts("Oracle");
 
       expect(sampleData.code).not.to.equal(undefined, "Code should be available");
       expect(sampleData.abi).not.to.equal(undefined, "ABI should be available");
@@ -21,7 +21,7 @@ describe("Test Sample contract", async function () {
     it("Deploy contract", async function () {
       const INIT_STATE = 0;
       const { contract } = await locklift.factory.deployContract({
-        contract: "Sample",
+        contract: "Oracle",
         publicKey: signer.publicKey,
         initParams: {
           _nonce: locklift.utils.getRandomNonce(),
@@ -31,18 +31,23 @@ describe("Test Sample contract", async function () {
         },
         value: locklift.utils.toNano(2),
       });
-      sample = contract;
+      oracle = contract;
 
-      expect(await locklift.provider.getBalance(sample.address).then(balance => Number(balance))).to.be.above(0);
+      expect(await locklift.provider.getBalance(oracle.address).then(balance => Number(balance))).to.be.above(0);
+      console.log("Oracle contract deployed to: ", oracle.address);
     });
 
     it("Interact with contract", async function () {
       const NEW_STATE = 1;
 
-      await sample.methods.setState({ _state: NEW_STATE }).sendExternal({ publicKey: signer.publicKey });
+      await oracle.methods.setState({ _state: NEW_STATE }).sendExternal({ publicKey: signer.publicKey });
 
-      const response = await sample.methods.getDetails({}).call();
+      const response = await oracle.methods.getDetails({}).call();
 
+      const random = await oracle.methods.generateRandomNumber();
+      console.log("Random Number Generated: ", random);
+
+      // const validator = oracle.methods.addValidator(user);
       expect(Number(response._state)).to.be.equal(NEW_STATE, "Wrong state");
     });
   });

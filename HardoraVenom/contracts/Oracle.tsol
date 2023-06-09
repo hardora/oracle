@@ -1,0 +1,85 @@
+pragma ever-solidity >= 0.61.2;
+pragma AbiHeader expire;
+pragma AbiHeader pubkey;
+
+contract Oracle {
+    uint state;
+    uint private count = 1;
+    uint public currentSessionId;
+
+    struct Session {
+        address userAddress;
+        address deviceAddress;
+        string data;
+        bytes32 requestId;
+    }
+    struct DeviceInfo {
+        string deviceType;
+    }
+
+    mapping(address => DeviceInfo) public trustedDeviceInfo;
+    mapping(uint256 => Session) public sessionData;
+    mapping(address => bool) public isValidator;
+    address[] public validators;
+
+    event StateChange(uint _state);
+    event ValidatorAdded(address indexed validator);
+
+    constructor(uint _state) public {
+        tvm.accept();
+        setState(_state);
+        currentSessionId = 0;
+    }
+
+    function generateRandomNumber() external returns (uint256 r) {
+        uint randomNumber = tvm.hash("HASHcu567");
+        r = (randomNumber / 10**60) ** count;
+        count++;
+        return r;
+    }
+
+    function addValidator(address _validator) public {
+        require(!isValidator[_validator], 201);
+        require(msg.sender == address(this), 202);
+        isValidator[_validator] = true;
+        validators.push(_validator);
+        emit ValidatorAdded(_validator);
+    }
+
+    function validatorsList() public view returns (address[] _validators) {
+        _validators = validators;
+        return _validators;
+    }
+
+    function addTrustedDeviceInfo(string _deviceType) public {
+        trustedDeviceInfo[msg.sender].deviceType = _deviceType;
+    }
+
+    function setState(uint _state) public {
+        tvm.accept();
+        state = _state;
+        emit StateChange(_state);
+    }
+
+    function getSessionData(
+        uint256 _sessionId
+    ) public view returns (address, address, string memory, bytes32) {
+        require(_sessionId < currentSessionId, 203);
+        Session session = sessionData[_sessionId];
+        return (
+            session.userAddress,
+            session.deviceAddress,
+            session.data,
+            session.requestId
+        );
+    }
+
+    function getTrustedDeviceInfo() public view returns (string memory) {
+        return trustedDeviceInfo[msg.sender].deviceType;
+    }
+
+    function getDetails() external view returns (uint _state) {
+        return state;
+    }
+
+}
