@@ -2,13 +2,13 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
       <header>
-        <div className="container mx-auto">
-          <div className="w-full items-center justify-between text-sm lg:flex py-8 px-2">
-            <p className="fixed left-0 top-0 flex backdrop-blur-2xl border-neutral-800  lg:static w-auto rounded-xl border lg:p-2 bg-zinc-800/30">
+        <div className="container p-6 mx-auto">
+          <div className="w-full md:items-center justify-between gap-4 text-sm flex flex-col md:flex-row py-8 px-2">
+            <p className="border-neutral-800  lg:static rounded-xl border p-2 bg-zinc-800/30">
               <img src="./images/app-logo.png" alt="" className="w-8" />
             </p>
-            <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-              <ul className="flex flex-row items-center gap-x-8">
+            <div>
+              <ul className="flex flex-row flex-wrap items-center gap-y-4 gap-x-8">
                 <li>Data</li>
                 <li>Documentation</li>
                 <li>Community</li>
@@ -35,8 +35,8 @@ export default function Home() {
       </header>
       <main>
         <section className="hero relative">
-          <div className="container mx-auto">
-            <div className="flex flex-row w-full justify-between gap-x-8">
+          <div className="container mx-auto p-6">
+            <div className="flex flex-col md:flex-row w-full justify-between gap-x-8">
               <div className="max-w-2xl flex-1 flex-col gap-y-1 mt-10 py-4 px-3">
                 <div>
                   <h1 className="text-5xl">
@@ -60,20 +60,20 @@ export default function Home() {
                     data.
                   </p>
                 </div>
-                <div className="flex flex-row gap-x-4 py-5">
+                <div className="flex flex-col md:flex-row gap-4 py-5">
                   <div className="text-sm">
-                    <button className="bg-primary px-4 py-3 rounded backdrop-blur-2xl hover:bg-transparent hover:border hover:border-gray-800">
+                    <button className="w-full md:w-auto bg-primary px-4 py-3 rounded hover:bg-transparent hover:border hover:border-gray-800">
                       Download App
                     </button>
                   </div>
                   <div className="text-sm">
-                    <button className="px-4 py-3 rounded border border-neutral-800">
+                    <button className="w-full md:w-auto px-4 py-3 rounded border border-neutral-800 hover:border-0 hover:bg-primary">
                       Read Documentation
                     </button>
                   </div>
                 </div>
               </div>
-              <div className="w-[450px] overflow-hidden">
+              <div className="w-full md:w-[450px] overflow-hidden">
                 <img
                   src="./images/platform illustration.png"
                   className="object-cover opacity-60"
@@ -84,12 +84,12 @@ export default function Home() {
           </div>
         </section>
         <section className="data_section">
-          <div className="container mx-auto">
+          <div className="container mx-auto p-6">
             <div className="flex flex-col">
               <div className="py-6">
                 <h2 className="text-3xl font-bold">Available Data</h2>
               </div>
-              <div className="grid grid-cols-4 gap-x-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="p-8 rounded bg-secondarydark gap-y-3 flex flex-col">
                   <h3 className="text-lg">Sport Data</h3>
                   <p className="text-sm">
@@ -123,17 +123,17 @@ export default function Home() {
           </div>
         </section>
         <section className="facuet">
-          <div className="container mx-auto py-24">
+          <div className="container mx-auto p-6 py-24">
             <div className="bg-gradient px-12 py-16 rounded-xl relative overflow-hidden">
               <div className="absolute right-0 w-[500px]">
                 <img
                   src="./images/platform illustration.png"
-                  className="opacity-30 absolute top-[-200px]"
+                  className="z-0 opacity-10 absolute top-[-200px]"
                   alt="hadera"
                 />
               </div>
-              <div className="max-w-3xl flex flex-col gap-y-4">
-                <h2 className="text-3xl font-bold">Hadora Faucet</h2>
+              <div className="max-w-3xl flex flex-col gap-y-4 z-50">
+                <h2 className="text-3xl font-bold z-50">Hadora Faucet</h2>
                 <p className="text-sm mb-5">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Facilis consequuntur esse porro culpa deleniti vitae
@@ -141,7 +141,7 @@ export default function Home() {
                   amet consectetur adipisicing elit. Facilis consequuntur esse
                   porro
                 </p>
-                <div>
+                <div className="z-50">
                   <a href="https://hardora.vercel.app">
                     <button className="px-4 py-3 rounded border border-gray-700 flex flex-row items-center gap-x-2">
                       Request faucet
@@ -164,9 +164,9 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <div className="container mx-auto">
+        <div className="container mx-auto p-6">
           <div className="bg-transparent py-4">
-            <div className="flex flex-row justify-between gap-8">
+            <div className="flex flex-col md:flex-row justify-between gap-8">
               <div className="text-sm">
                 <ul className="flex flex-row items-center gap-x-8">
                   <li>Documentation</li>
