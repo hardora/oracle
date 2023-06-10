@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+    font-family: 'Montserrat', sans-serif;
+}
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0px;
+}
+.hero h1 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #ffffff;
+  font-size: 3rem;
+  line-height: 60px;
+  font-weight: 500;
+}
+
+.hero .text_base{
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 30px;
+}
+.data_section{
+  padding: 40px 0px;
+}
+.bg-gradient {
+  background: linear-gradient(65deg,#111432,#0eb461);
+}
