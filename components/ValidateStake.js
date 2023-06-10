@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Image, ImageBackground, Pressable, TextInput } from "react-native";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
 
@@ -15,7 +15,7 @@ export default function ValidateStake() {
     navigation.navigate("StakeToken");
   }
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View>
         <View style={styles.row}>
           <Ionicons
@@ -178,7 +178,7 @@ export default function ValidateStake() {
           </Pressable>
         </ImageBackground>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

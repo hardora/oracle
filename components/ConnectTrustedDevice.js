@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Image, Pressable } from "react-native";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
 
@@ -15,7 +15,7 @@ export default function ConnectTrustedDevices() {
     navigation.navigate("AccountDashboard");
   }
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.row}>
           <Ionicons
@@ -56,7 +56,7 @@ export default function ConnectTrustedDevices() {
           </View>
         </Pressable>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

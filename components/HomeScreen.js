@@ -1,5 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
@@ -27,7 +34,7 @@ export default function HomeScreen() {
     navigation.navigate("Settings");
   }
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.right}>
         <Ionicons name="add-outline" color="#f5f5f5" size={30} />
         <Text style={styles.text}>Add Username</Text>
@@ -35,7 +42,7 @@ export default function HomeScreen() {
       <View>
         <View style={styles.rowed}>
           <Text style={styles.text}>Available Balance</Text>
-          <Ionicons name="alarm" color="#f5f5f5" size={30} />
+          <Image source={require("../assets/images/Vector.png")} />
         </View>
         <View style={styles.accountInfo}>
           <Image
@@ -139,7 +146,7 @@ export default function HomeScreen() {
           </Pressable>
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

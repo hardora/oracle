@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { Image, ImageBackground, Pressable } from "react-native";
+import { Image, ImageBackground, Pressable, ScrollView } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../constant/Color";
@@ -15,7 +15,7 @@ export default function VerifyScreen() {
     navigation.navigate("SetupWalletScreen");
   }
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.logo}>
           <Image source={require("../assets/images/logo_s.png")} />
@@ -121,7 +121,7 @@ export default function VerifyScreen() {
           </View>
         </ImageBackground>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     paddingHorizontal: 60,
     justifyContent: "center",
-    marginTop: 350,
+    marginTop: 30,
   },
   seeds: {
     marginHorizontal: 10,
