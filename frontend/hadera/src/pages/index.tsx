@@ -62,9 +62,11 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col md:flex-row gap-4 py-5">
                   <div className="text-sm">
-                    <button className="w-full md:w-auto bg-primary px-4 py-3 rounded hover:bg-transparent hover:border hover:border-gray-800">
-                      Download App
-                    </button>
+                    <a href="https://drive.google.com/file/d/1eI0PT5YkeA3eslY1-e6CkKdfVgGc0UNP/view?usp=drivesdk">
+                      <button className="w-full md:w-auto bg-primary px-4 py-3 rounded hover:bg-transparent hover:border hover:border-gray-800">
+                        Download App
+                      </button>
+                    </a>
                   </div>
                   <div className="text-sm">
                     <button className="w-full md:w-auto px-4 py-3 rounded border border-neutral-800 hover:border-0 hover:bg-primary">
