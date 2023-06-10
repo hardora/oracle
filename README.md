@@ -6,6 +6,10 @@
    - Download Expo App
    - Scan the QRCODE with your Expo App 
    
+ - The smart contracts for both token and oracle can be found here in oracle/HardoraVenom/contracts
+ - Frontend: Oracle/frontend/hadera
+   
+   
    
 Hardora Oracle
 
@@ -76,4 +80,4 @@ Important link and address
 - Token address: 0:b7659a80cfcf4cfdb016bfb76134a0276576e5ab6737544b26fdecd62810c1da
 - Oracle address: 0:41aa762d3c91dd544d2b20b6d0b68d3d34ccd2903b2c71ac726008c4255fac7a
 - Hardora faucet: https://hardora.vercel.app/
-- Landing page:
+- Landing page: https://hadoralandingpage.vercel.app/
