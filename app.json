@@ -6,21 +6,24 @@
     "orientation": "portrait",
     "icon": "./assets/images/app-logo.png",
     "userInterfaceStyle": "light",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-   
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/images/app-logo.png",
+        "backgroundColor": "#111432"
+      },
+      "package": "com.faytey7.hardora"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/images/app-logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "02884827-4bd4-4ecd-a2a5-ce2063d1fcca"
+      }
     }
   }
 }

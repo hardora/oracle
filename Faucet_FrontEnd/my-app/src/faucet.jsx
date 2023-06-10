@@ -65,7 +65,7 @@ function FaucetRequest() {
           Hardora Faucet for Developers
         </h1>
         <p className="text-gray-400 py-5 text-sm md:text-base lg:text-base">
-          feel free to request Test Hardora tokens to your wallet
+          Feel free to request Test Hardora tokens to your wallet
         </p>
 
         <form

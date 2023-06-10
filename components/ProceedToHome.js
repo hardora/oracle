@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image, Pressable, StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet, ScrollView } from "react-native";
 import { Text } from "react-native";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,7 +14,7 @@ export default function ProceedToHome() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.logo}>
           <Image source={require("../assets/images/logo_s.png")} />
@@ -51,7 +51,7 @@ export default function ProceedToHome() {
           </Pressable>
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -109,5 +109,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Color.bg,
+    paddingTop: 10,
   },
 });

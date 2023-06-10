@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
 
   buttonHolder: {
-    marginVertical: 100,
+    marginVertical: 70,
     marginHorizontal: 20,
     justifyContent: "space-around",
   },
@@ -127,10 +127,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 36,
     fontWeight: 700,
+    marginHorizontal: 20,
   },
 
   logo: {
-    marginVertical: 90,
+    marginVertical: 60,
     alignItems: "center",
     justifyContent: "center",
   },

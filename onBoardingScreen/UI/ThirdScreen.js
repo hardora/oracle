@@ -19,7 +19,7 @@ function ThirdScreen({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.container}>
         <SafeAreaView>
           <View style={styles.nobHolder}>
@@ -79,7 +79,7 @@ function ThirdScreen({ navigation }) {
           </Pressable>
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

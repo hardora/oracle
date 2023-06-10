@@ -24,7 +24,7 @@ function FirstScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* <SafeAreaView> */}
       <View style={styles.container}>
         <SafeAreaView>
@@ -85,7 +85,7 @@ function FirstScreen() {
           </Pressable>
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 
